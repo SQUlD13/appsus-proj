@@ -1,0 +1,8 @@
+.mail-card {
+  padding: 10px 20px;
+  border: 1px solid black;
+}
+
+.mail-card > *:not(:last-child) {
+  margin-inline-end: 1rem;
+}

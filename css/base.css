@@ -67,32 +67,28 @@ a:active{
     border:3px rgba(255, 250, 250, 0.75) solid;
 }
 
-::-webkit-scrollbar{
-    height:10px;
-    width:13px;
+::-webkit-scrollbar {
+  height: 10px;
+  width: 13px;
 }
-::-webkit-scrollbar-button{
-    height:0;width: 0;
+::-webkit-scrollbar-button {
+  height: 0;
+  width: 0;
 }
-::-webkit-scrollbar-thumb{
-    background-clip: padding-box;
-    background: var(--main-color-m) ;
-    border-radius: 6px;
-    transition: color .5s ease;
+::-webkit-scrollbar-thumb {
+  background-clip: padding-box;
+  background: var(--main-color-m);
+  border-radius: 6px;
+  transition: color 0.5s ease;
 }
-::-webkit-scrollbar-track{
-    background: var(--white);
-    filter:invert();
-    border-radius:6px;
+::-webkit-scrollbar-track {
+  background: var(--white);
+  filter: invert();
+  border-radius: 6px;
 }
-::-webkit-scrollbar-corner{
-    opacity: 0;
+::-webkit-scrollbar-corner {
+  opacity: 0;
 }
-
-
-
-
-
 
 /* ///////////////////////////////// */
 /* TRANSITIONS */
@@ -101,109 +97,111 @@ a:active{
   transition: opacity 0.5s ease;
 }
 
-
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
 }
 
 .list-column-enter-active,
-.list-column-leave-active{
-    position:absolute;
-    transition: opacity .25s ease, transform .25s ease
+.list-column-leave-active {
+  position: absolute;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
-.list-column-move{
-    transition:all .25s ease
+.list-column-move {
+  transition: all 0.25s ease;
 }
 
 .list-column-enter,
-.list-column-leave-to{
-    opacity:0;
-    transform:translateX(-40px);
+.list-column-leave-to {
+  opacity: 0;
+  transform: translateX(-40px);
 }
 
 .slide-down-enter-active,
-.slide-down-leave-active{
-    height:500px;
-    overflow: hidden;
-    transition: height .25s ease;
+.slide-down-leave-active {
+  height: 500px;
+  overflow: hidden;
+  transition: height 0.25s ease;
 }
 .slide-down-enter,
-.slide-down-leave-to{
-    overflow: hidden;
-    height: 0;
-    transition:height .25s ease;
+.slide-down-leave-to {
+  overflow: hidden;
+  height: 0;
+  transition: height 0.25s ease;
 }
 /* ///////////////////////////////// */
 /* HELPERS */
 /* FLEX - BASE */
-.text-nowrap{
-    white-space: nowrap;
+.column {
+  flex-direction: column;
 }
-.clean-list{
-    list-style: none;
-    padding:0;
-    margin:0;
+.text-nowrap {
+  white-space: nowrap;
 }
-.flex{
-    display:flex;
+.clean-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-.inline-flex{
-    display:inline-flex;
-    flex-wrap: nowrap;
+.flex {
+  display: flex;
 }
-.center{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.inline-flex {
+  display: inline-flex;
+  flex-wrap: nowrap;
 }
-.text-center{
-    text-align: center;
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.text-end{
-    text-align:end;
+.text-center {
+  text-align: center;
 }
-.column{
-    flex-direction: column;
+.text-end {
+  text-align: end;
+}
+.column {
+  flex-direction: column;
 }
 /* ALIGNMET/CONTENT */
-.jcc{
-    justify-content: center;
+.jcc {
+  justify-content: center;
 }
-.justify-start{
-    justify-content: start;
+.justify-start {
+  justify-content: start;
 }
-.justify-end{
-    justify-content:flex-end;
+.justify-end {
+  justify-content: flex-end;
 }
-.aic{
-    align-items: center;
+.aic {
+  align-items: center;
 }
-.align-start{
-    align-items: flex-start;
+.align-start {
+  align-items: flex-start;
 }
-.space-between{
-    justify-content: space-between;
+.space-between {
+  justify-content: space-between;
 }
-.space-evenly{
-    justify-content: space-evenly;
+.space-evenly {
+  justify-content: space-evenly;
 }
-.self-center{
-    align-self: center;
+.self-center {
+  align-self: center;
 }
 /* FLEX-GROW */
-.flex-1{
-    flex-grow:1;
+.flex-1 {
+  flex-grow: 1;
 }
-.flex-2{
-    flex-grow:2;
+.flex-2 {
+  flex-grow: 2;
 }
-.flex-4{
-    flex-grow:4;
+.flex-4 {
+  flex-grow: 4;
 }
-.flex-8{
-    flex-grow:8;
+.flex-8 {
+  flex-grow: 8;
 }
-.fit-cover{
-    object-fit: cover;
+.fit-cover {
+  object-fit: cover;
 }

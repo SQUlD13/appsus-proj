@@ -6,7 +6,7 @@ export default {
     <section class="mail-app">
         <h1>mailApp</h1>
         <router-link to="/"> Home </router-link>
-        <mail-list/>
+        <mail-list v-if="mails.length" :mails="mails"/>
     </section>
     `,
   data() {

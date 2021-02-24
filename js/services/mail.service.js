@@ -11,13 +11,15 @@ export const mailService = {
 
 const MAIL_KEY = 'mails'
 const DEFAULT_ADDRESSES = {
-  from: '',
-  to: '',
+  from: 'you',
+  to: 'you',
 }
 const DEFAULT_CONTENT = {
-  subject: '',
-  body: '',
+  subject: 'no subject',
+  body: 'no content',
 }
+const DEFAULT_MAIL = createMail()
+const DEFAULT_MAILS = createDefaultMails()
 
 function createMail(addresses = DEFAULT_ADDRESSES, content = DEFAULT_CONTENT) {
   const formattedMail = {
@@ -26,12 +28,25 @@ function createMail(addresses = DEFAULT_ADDRESSES, content = DEFAULT_CONTENT) {
     general: {
       timestamp: Date.now(),
     },
+    id: utilService.makeId(),
   }
   return formattedMail
 }
 
+function createDefaultMails() {
+  let mails = []
+  for (let i = 0; i < 5; i++) {
+    mails.push(createMail())
+  }
+  return mails
+}
+
 function pushMail(formattedMail) {
   return storageService.post(MAIL_KEY, formattedMail)
+}
+
+function pushMails(formattedMails) {
+  return storageService.postMany(MAIL_KEY, formattedMails)
 }
 
 function addMail(mail) {
@@ -39,16 +54,15 @@ function addMail(mail) {
   return pushMail(formattedMail)
 }
 
-function addDedaultMails(quantity = 5) {}
-
 function getMail(mailId) {}
 
 function getMails() {
   const mails = storageService.query(MAIL_KEY)
-  mails.then((mails) => {
-    if (!mails.length) {
-      // return create mails
+
+  return mails.then((resMails) => {
+    if (!resMails.length) {
+      return pushMails(DEFAULT_MAILS)
     }
-    return mails
+    return resMails
   })
 }
