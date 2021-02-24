@@ -3,7 +3,6 @@ import mailNav from '../cmps/mail-nav.cmp.js'
 import mailList from '../cmps/mail-list.cmp.js'
 import mailBox from '../cmps/mail-box.cmp.js'
 import { eventBus } from '../../../services/event-bus.service.js'
-import { storageService } from '../../../services/async-storage-service.js'
 
 export default {
   template: `
@@ -12,7 +11,7 @@ export default {
         <router-link to="/"> Home </router-link>
         <main class="main-container flex">
           <mail-nav/>
-          <mail-list v-if="mails.length" :mails="mails"/>
+          <router-view v-if="mails.length" :mails="mails"/>
         </main>
         <mail-box v-if="mailBoxOpen" @onCloseMailBox="mailBoxOpen = false"/>
     </section>
@@ -21,6 +20,12 @@ export default {
     return {
       mails: [],
       mailBoxOpen: false,
+      myName: 'nisim',
+    }
+  },
+  provide() {
+    return {
+      mails: this.mails,
     }
   },
   methods: {
@@ -33,6 +38,9 @@ export default {
         this.mails = mails
       })
     },
+  },
+  provide: {
+    myName: 'string nisim',
   },
   components: {
     mailList,

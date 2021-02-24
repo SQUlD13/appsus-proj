@@ -2,9 +2,11 @@ import { eventBus } from '../services/event-bus.service.js'
 
 export default {
   template: `
+      <transition name="fade">
         <article v-if="notification" class="notification flex" :class="notifBgcClass">
             <p class="content">{{notification.msg}}</p>
         </article>
+      </transition>  
     `,
   data() {
     return {
