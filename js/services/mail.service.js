@@ -11,14 +11,15 @@ export const mailService = {
 
 const MAIL_KEY = 'mails'
 const DEFAULT_ADDRESSES = {
-  from: '',
-  to: '',
+  from: 'you',
+  to: 'you',
 }
 const DEFAULT_CONTENT = {
-  subject: '',
-  body: '',
+  subject: 'no subject',
+  body: 'no content',
 }
 const DEFAULT_MAIL = createMail()
+const DEFAULT_MAILS = createDefaultMails()
 
 function createMail(addresses = DEFAULT_ADDRESSES, content = DEFAULT_CONTENT) {
   const formattedMail = {
@@ -27,31 +28,30 @@ function createMail(addresses = DEFAULT_ADDRESSES, content = DEFAULT_CONTENT) {
     general: {
       timestamp: Date.now(),
     },
+    id: utilService.makeId(),
   }
   return formattedMail
+}
+
+function createDefaultMails() {
+  let mails = []
+  for (let i = 0; i < 5; i++) {
+    mails.push(createMail())
+  }
+  return mails
 }
 
 function pushMail(formattedMail) {
   return storageService.post(MAIL_KEY, formattedMail)
 }
 
-function addMail(mail = DEFAULT_MAIL) {
-  const formattedMail = createMail(mail.addresses, mail.content)
-  return pushMail(formattedMail)
+function pushMails(formattedMails) {
+  return storageService.postMany(MAIL_KEY, formattedMails)
 }
 
-function addDedaultMails(quantity = 5) {
-  let proccessStatus = new Promise((resResolve) => {
-    for (let i = 0; i < quantity; i++) {
-      addMail()
-      console.log('adding default mail...')
-      if (i === quantity - 1) {
-        resResolve('finished')
-      }
-    }
-  })
-
-  return proccessStatus.then(getMails)
+function addMail(mail) {
+  const formattedMail = createMail(mail.addresses, mail.content)
+  return pushMail(formattedMail)
 }
 
 function getMail(mailId) {}
@@ -61,7 +61,7 @@ function getMails() {
 
   return mails.then((resMails) => {
     if (!resMails.length) {
-      return addDedaultMails()
+      return pushMails(DEFAULT_MAILS)
     }
     return resMails
   })
