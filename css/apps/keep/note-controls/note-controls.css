@@ -1,0 +1,5 @@
+.main-note-controls{
+    display:flex;
+    position:relative;
+    bottom:10px;
+}

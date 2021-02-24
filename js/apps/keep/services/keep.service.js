@@ -19,7 +19,6 @@ function createNote({ txt = '', isList = false, color = utilService.createRandom
         }],
         isList,
         color,
-        textColor
     }
 }
 function getNote(id) {

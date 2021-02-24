@@ -1,3 +1,4 @@
+@import url('../note-controls/note-controls.css');
 @font-face {
     font-family:'fa';
     src: url('../../../fonts/font-awesome/fa-regular-400.woff2') format ('woff2');
@@ -31,15 +32,13 @@
 .note-content{
     display: flex;
     flex-grow: 1;
+    position:relative;
 }
-.note-controls{
-    display:flex;
-    position:absolute;
-    bottom:10px;
-}
+
 .note-text{
     white-space: pre-wrap;
     resize:none;
+    position:relative;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -51,11 +50,17 @@
     outline:none;
     transition: box-shadow .25s ease, border .25s ease;
 }
+.note-content .delete-btn{
+    height:12px;
+    width: 12px;
+}
 .note-content-list{
     display: flex;
     flex-flow: column;
     margin:0;
     padding:0;
+    max-height: 500px;
+    overflow-y: auto;
 }
 .note-content-list .note-text{
     border:3px var(--s) solid;
@@ -84,13 +89,17 @@
     width:48px;
     height:48px;
 }
+.note .delete-btn{
+    background: transparent;
+}
+
 .palette-icon{
     pointer-events: none;
     position:absolute;
 
     filter:invert()
 }
-.color-select-btn{
+.invert-btn{
     padding:0;
     border:0;
     filter:invert();

@@ -1,21 +1,19 @@
+import { utilService } from '../../../services/util.service.js'
 import { keepService } from '../services/keep.service.js'
 import { eventBus } from '../../../services/event-bus.service.js'
+import addBtn from '../../../cmps/add-btn.cmp.js'
 import note from './note.cmp.js'
-import { utilService } from '../../../services/util.service.js'
 
 export default {
     template: `
     <section class="note-add">
-        <button class="btn add-btn" @click="this.toggleActive">
-            <svg class="icon" height="10" width="10">
-                <path id="Vertical" d="M5 10 L5 0" :stroke="plusColor" stroke-width="3" stroke-linecap="round"/>
-                <path id="Horizontal" d="M0 5 L10 5" :stroke="plusColor" stroke-width="3" stroke-linecap="round"/>
-            </svg>
-        </button>  
+        <add-btn @add="this.toggleActive" ></add-btn>
+        <transition name="slide-down">
         <div v-if="isActive" class="new-note">
             <note :notedata="this.note" @delete-note="toggleActive()" @change-txt="updateContent"/>
             <button class="btn add-btn" @click="addNote">Add Note</button>
         </div>
+        </transition>
     </section>
     `,
     data() {
@@ -55,5 +53,5 @@ export default {
             return keepService.createNote(note)
         }
     },
-    components: { note }
+    components: { note, addBtn }
 }

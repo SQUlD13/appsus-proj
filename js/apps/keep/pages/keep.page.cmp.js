@@ -7,11 +7,12 @@ export default {
     <section class="keep-app main-container">
         <h1>keepApp</h1>        
         <noteAdd @add-note="addNote"/>
-
         <ul v-if="notes" class="clean-list note-list">
-            <li v-for="note in notes">
-                <note :id="note.id" :value="note.txt" @delete-note="deleteNote" @add-note="addNote" @update-notes="updateNotes"/>
-            </li>
+            <transition-group name="list-column">
+                <li v-for="note in notes" :key="note.id">
+                    <note :id="note.id" :value="note.txt" @delete-note="deleteNote" @add-note="addNote" @update-notes="updateNotes"/>
+                </li>
+            </transition-group>
         </ul>
     </section>
     `,
@@ -33,6 +34,7 @@ export default {
     },
     methods: {
         deleteNote(id) {
+            console.log("🚀 ~ file: keep.page.cmp.js ~ line 38 ~ deleteNote ~ id", id)
             keepService.deleteNote(id)
                 .then(() => { this.updateNotes() })
 

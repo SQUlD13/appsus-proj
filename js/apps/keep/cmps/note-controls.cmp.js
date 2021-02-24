@@ -1,20 +1,23 @@
 import deleteBtn from '../../../cmps/delete-btn.cmp.js'
+import { utilService } from '../../../services/util.service.js'
 import { keepService } from '../services/keep.service.js'
 export default {
     props: ['note'],
     template: `
     <div class="note-controls">
-            <button class="btn center color-select-btn" >
+        <div class="main-note-controls">
+            <button class="btn center invert-btn" >
                 <div class="note-color-input-wrapper" :style="background">
-                    <input type="color" id="note-color" v-model="note.color" @input="$emit('background-change',note)" @submit="$emit('background-save',bgc)"/>
+                    <input type="color" id="note-color" v-model="note.color" @input="$emit('background-change',note)" @change="$emit('background-save',note)"/>
                 </div>
-                <p class="fas palette-icon" :style="'color:'+this.bgc+';'">&#xf53f;</p>
+                <p class="fas palette-icon" :style="color">&#xf53f;</p>
             </button>
-            <button class="btn list-toggle-btn" @click="$emit('toggle-list')">
-                <p class="fas list-icon" v-html="this.listContent" style="font-family:fas;">{{listContent}}</p>
+            <button class="btn invert-btn list-toggle-btn" @click="$emit('toggle-list')" :style="background">
+                <p class="fas invert-btn list-icon" v-html="this.listContent" :style="color">{{listContent}}</p>
             </button>
-            <delete-btn @delete="$emit('delete-note')" />
+            <delete-btn @delete="$emit('delete-note')" :info="this.info" :key="info.color"/>
         </div>
+    </div>
     `,
     computed: {
         listContent() {
@@ -22,6 +25,18 @@ export default {
         },
         background() {
             return `background:${this.note.color};`
+        },
+        color() {
+            return `color:${this.note.color};`
+        },
+        invertedColor() {
+            return utilService.invertColor(this.note.color)
+        },
+        info() {
+            return {
+                size: 16,
+                color: this.invertedColor
+            }
         }
     },
     components: { deleteBtn }

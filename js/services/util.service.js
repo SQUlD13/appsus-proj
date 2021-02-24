@@ -61,6 +61,24 @@ function createRandomColor() {
     }
     return color
 }
+function invertColor(hex) {
+    if (hex.indexOf('#') === 0) {
+        hex = hex.slice(1);
+    }
+    if (hex.length !== 6) {
+        throw new Error('Invalid HEX color.');
+    }
+    var r = (255 - parseInt(hex.slice(0, 2), 16)).toString(16),
+        g = (255 - parseInt(hex.slice(2, 4), 16)).toString(16),
+        b = (255 - parseInt(hex.slice(4, 6), 16)).toString(16);
+
+    return '#' + _padZero(r) + _padZero(g) + _padZero(b);
+}
+function _padZero(str, len) {
+    len = len || 2;
+    var zeros = new Array(len).join('0');
+    return (zeros + str).slice(-len);
+}
 
 export const utilService = {
     getRandomInt,
@@ -68,7 +86,8 @@ export const utilService = {
     makeId,
     capitalize,
     debounce,
-    createRandomColor
+    createRandomColor,
+    invertColor
 }
 
 function _getRandColorVal() {

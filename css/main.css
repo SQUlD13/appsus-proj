@@ -1,6 +1,7 @@
 @import url('base.css');
-@import url('apps/keep/note/note.css');
-@import url('apps/keep/note-add/note-add.css');
+@import url('cmps/delete-btn.css');
+
+@import url('apps/keep/main.css');
 
 /* mail imports: */
 @import url('apps/mail/mail-card.css');

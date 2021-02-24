@@ -10,18 +10,20 @@ export default {
     template: `
     <div v-if="note" class="note" :style="background">
         <div v-if="!note.isList" class="note-content">
-            <textarea v-if="note.content" class="note-text" :style="this.textStyle" v-model="note.content[0].txt" v-on:input="onValueChange($event.target.value,note.content[0].id)" />
+            <textarea v-if="note.content" class="note-text" :style="textStyle" v-model="note.content[0].txt" 
+            v-on:input="onValueChange($event.target.value,note.content[0].id)" />
         </div>
         <ul v-else class="note-content-list">
             <li v-for="text in note.content" class="note-content" :key="text.id">
-                <textarea v-if="text" class="note-text" v-model="text.txt" :style="getStyle(text.active)" v-on:input="onValueChange($event.target.value,text.id)"
-                @click="toggleItem(text.id)"/>
+                <textarea v-if="text" class="note-text" v-model="text.txt" :style="getStyle(text.active)" 
+                v-on:input="onValueChange($event.target.value,text.id)" @click="toggleItem(text.id)"/>
                 <delete-btn @delete="deleteContentListItem(text.id)" />                
             </li>
-            <add-btn @add="addContentListItem(note.id)"/>
+            <add-btn @add="addContentListItem(note.id)" :info="{color:this.color}" />
         </ul>
 
-        <note-controls :note="note" @toggle-list="toggleList" @background-change="updateBackground" @delete-note="$emit('delete-note',this.id)"></note-controls>
+        <note-controls :note="note" @toggle-list="toggleList" @background-change="updateBackground" @delete-note="$emit('delete-note',id)" 
+        @background-save="saveNote"></note-controls>
 </div>
     `,
     data() {
@@ -59,7 +61,7 @@ export default {
             return `background :` + this.color + ';'
         },
         textStyle() {
-            return `color:` + this.textColor + ';'
+            return `color:` + utilService.invertColor(this.color) + ';'
         },
     },
     methods: {
@@ -111,6 +113,12 @@ export default {
         },
         getStyle(activeBool) {
             return (activeBool) ? this.textStyle : 'text-decoration: line-through;' + this.textStyle
+        },
+        saveNote() {
+            keepService.getNote(this.id)
+                .then(() => {
+                    keepService.updateNote(this.note)
+                })
         }
     },
     components: { addBtn, deleteBtn, noteControls }
