@@ -78,7 +78,7 @@ a:active{
 }
 ::-webkit-scrollbar-thumb {
   background-clip: padding-box;
-  background: var(--main-color-m);
+  background: var(--s);
   border-radius: 6px;
   transition: color 0.5s ease;
 }
