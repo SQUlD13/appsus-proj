@@ -39,7 +39,11 @@ function addMail(mail) {
   return pushMail(formattedMail)
 }
 
-function addDedaultMails(quantity = 5) {}
+function addDedaultMails(quantity = 5) {
+  for (let index = 0; index < array.length; index++) {
+    const element = array[index]
+  }
+}
 
 function getMail(mailId) {}
 

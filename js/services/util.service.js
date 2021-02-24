@@ -60,7 +60,6 @@ export const utilService = {
   makeId,
   capitalize,
   debounce,
-  getTimestamp,
 }
 
 function _getRandChar() {
