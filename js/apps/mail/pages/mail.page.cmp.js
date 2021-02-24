@@ -25,6 +25,9 @@ export default {
   },
   created() {
     const mails = mailService.getMails()
-    mails.then(this.refreshMails)
+    mails.then((mails) => {
+      console.log(mails)
+      this.refreshMails(mails)
+    })
   },
 }

@@ -18,6 +18,7 @@ const DEFAULT_CONTENT = {
   subject: '',
   body: '',
 }
+const DEFAULT_MAIL = createMail()
 
 function createMail(addresses = DEFAULT_ADDRESSES, content = DEFAULT_CONTENT) {
   const formattedMail = {
@@ -34,25 +35,34 @@ function pushMail(formattedMail) {
   return storageService.post(MAIL_KEY, formattedMail)
 }
 
-function addMail(mail) {
+function addMail(mail = DEFAULT_MAIL) {
   const formattedMail = createMail(mail.addresses, mail.content)
   return pushMail(formattedMail)
 }
 
 function addDedaultMails(quantity = 5) {
-  for (let index = 0; index < array.length; index++) {
-    const element = array[index]
-  }
+  let proccessStatus = new Promise((resResolve) => {
+    for (let i = 0; i < quantity; i++) {
+      addMail()
+      console.log('adding default mail...')
+      if (i === quantity - 1) {
+        resResolve('finished')
+      }
+    }
+  })
+
+  return proccessStatus.then(getMails)
 }
 
 function getMail(mailId) {}
 
 function getMails() {
   const mails = storageService.query(MAIL_KEY)
-  mails.then((mails) => {
-    if (!mails.length) {
-      // return create mails
+
+  return mails.then((resMails) => {
+    if (!resMails.length) {
+      return addDedaultMails()
     }
-    return mails
+    return resMails
   })
 }
