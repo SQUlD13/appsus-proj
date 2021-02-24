@@ -1,3 +1,5 @@
+import { eventBus } from '../../../services/event-bus.service.js'
+
 export default {
   template: `
           <nav class="mail-nav flex column">
@@ -7,6 +9,7 @@ export default {
   methods: {
     createMail() {
       console.log('creating mail...')
+      eventBus.$emit('onOpenMailBox')
     },
   },
   computed: {},

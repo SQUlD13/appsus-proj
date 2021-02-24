@@ -42,7 +42,7 @@ function createDefaultMails() {
 }
 
 function pushMail(formattedMail) {
-  return storageService.post(MAIL_KEY, formattedMail)
+  return storageService.postFirst(MAIL_KEY, formattedMail)
 }
 
 function pushMails(formattedMails) {
