@@ -1,31 +1,28 @@
 import { keepService } from '../services/keep.service.js'
 import note from '../cmps/note.cmp.js'
+import noteAdd from '../cmps/note-add.cmp.js'
 
 export default {
     template: `
     <section class="keep-app main-container">
         <h1>keepApp</h1>
+        <router-link to="/"> Home </router-link>
 
-        <button class="btn add-btn">
-            <svg class="icon" height="10" width="10">
-                <path id="Vertical" d="M5 10 L5 0" :stroke="this.plusColor" stroke-width="3" stroke-linecap="round"/>
-                <path id="Horizontal" d="M0 5 L10 5" :stroke="this.plusColor" stroke-width="3" stroke-linecap="round"/>
-            </svg>
-        </button>  
+        
+        <noteAdd @add-note="addNote"/>
 
         <ul v-if="notes" class="clean-list note-list">
             <li v-for="note in notes" @>
-                <note :note="note" @delete-note="deleteNote"> </note>
+                <note :note="note" :value="note.txt" @delete-note="deleteNote" @add-note="addNote" />
             </li>
             <pre>{{notes}}</pre>
         </ul>
-        <router-link to="/"> Home </router-link>
     </section>
     `,
     data() {
         return {
             notes: null,
-            plusColor: '#222',
+            newNote: null
         }
     },
     created() {
@@ -35,6 +32,7 @@ export default {
                     this.notes = keepService.createNotes()
                 } else this.notes = notes
             })
+        this.newNote = keepService.createNote({})
     },
     methods: {
         deleteNote(id) {
@@ -47,9 +45,17 @@ export default {
                 .then(notes => {
                     this.notes = notes
                 })
+        },
+        addNote(note) {
+            console.log('adding note', note)
+            keepService.addNote(note)
+                .then(() => {
+                    this.updateNotes()
+                })
         }
     },
     components: {
-        note
+        note,
+        noteAdd
     }
 }
