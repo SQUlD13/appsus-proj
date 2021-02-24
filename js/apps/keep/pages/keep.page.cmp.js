@@ -5,10 +5,7 @@ import noteAdd from '../cmps/note-add.cmp.js'
 export default {
     template: `
     <section class="keep-app main-container">
-        <h1>keepApp</h1>
-        <router-link to="/"> Home </router-link>
-
-        
+        <h1>keepApp</h1>        
         <noteAdd @add-note="addNote"/>
 
         <ul v-if="notes" class="clean-list note-list">
