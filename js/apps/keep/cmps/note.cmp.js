@@ -14,7 +14,8 @@ export default {
         </div>
         <ul v-else class="note-content-list">
             <li v-for="text in note.content" class="note-content" :key="text.id">
-                <textarea v-if="text" class="note-text" v-model="text.txt" :style="this.textStyle" />
+                <textarea v-if="text" class="note-text" v-model="text.txt" :style="getStyle(text.active)" v-on:input="onValueChange($event.target.value,text.id)"
+                @click="toggleItem(text.id)"/>
                 <delete-btn @delete="deleteContentListItem(text.id)" />                
             </li>
             <add-btn @add="addContentListItem(note.id)"/>
@@ -59,13 +60,10 @@ export default {
         },
         textStyle() {
             return `color:` + this.textColor + ';'
-        }
+        },
     },
     methods: {
         onValueChange(val, id) {
-            console.log("🚀 ~ file: note.cmp.js ~ line 65 ~ onValueChange ~ val", val)
-            // console.log('value changed to', event.target.value, id)
-            // this.$emit('change-txt', event.target.value, id)
             keepService.getNote(this.id)
                 .then(note => {
                     var idx = note.content.findIndex(text => text.id === id)
@@ -73,11 +71,22 @@ export default {
                     note.content.splice(idx, 1, obj)
                     keepService.updateNote(note)
                 })
-
         },
         toggleList() {
             this.note.isList = !this.note.isList
             keepService.updateNote(this.note, this.id)
+        },
+        toggleItem(itemId) {
+            keepService.getNote(this.id)
+                .then(note => {
+                    var idx = note.content.findIndex(text => text.id === itemId)
+                    var text = note.content[idx]
+                    text.active = !text.active
+                    note.content.splice(idx, 1, text)
+                    this.note = note
+                    keepService.updateNote(note)
+                        .then(() => { this.$emit('update-notes') })
+                })
         },
         addContentListItem(noteId) {
             keepService.addContentListItem(noteId)
@@ -99,6 +108,9 @@ export default {
         },
         updateBackground({ color }) {
             this.color = color
+        },
+        getStyle(activeBool) {
+            return (activeBool) ? this.textStyle : 'text-decoration: line-through;' + this.textStyle
         }
     },
     components: { addBtn, deleteBtn, noteControls }

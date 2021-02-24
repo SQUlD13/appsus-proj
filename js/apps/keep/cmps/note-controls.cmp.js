@@ -18,7 +18,7 @@ export default {
     `,
     computed: {
         listContent() {
-            return (this.isList) ? '\&#xf0ca;' : '\&#xf550'
+            return (this.note.isList) ? '\&#xf0ca;' : '\&#xf550'
         },
         background() {
             return `background:${this.note.color};`

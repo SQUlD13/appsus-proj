@@ -10,9 +10,8 @@ export default {
 
         <ul v-if="notes" class="clean-list note-list">
             <li v-for="note in notes">
-                <note :id="note.id" :value="note.txt" @delete-note="deleteNote" @add-note="addNote"/>
+                <note :id="note.id" :value="note.txt" @delete-note="deleteNote" @add-note="addNote" @update-notes="updateNotes"/>
             </li>
-            <pre>{{notes}}</pre>
         </ul>
     </section>
     `,

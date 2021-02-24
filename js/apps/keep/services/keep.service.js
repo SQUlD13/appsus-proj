@@ -9,11 +9,12 @@ function query() {
     return storageService.query(KEEP_KEY)
 }
 
-function createNote({ txt = '', isList = false, color = utilService.createRandomColor(), textColor = '#222' }) {
+function createNote({ txt = '', isList = false, color = utilService.createRandomColor(), textColor = '#222', active = true }) {
     console.log('creating note with color', color)
     return {
         content: [{
             txt,
+            active,
             id: utilService.makeId()
         }],
         isList,
