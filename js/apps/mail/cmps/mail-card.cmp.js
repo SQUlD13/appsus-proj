@@ -1,5 +1,6 @@
 export default {
   props: ['mail'],
+  inject: ['myName'],
   template: `
         <article class="mail-card center">
             <p class="mail-sender"><span class="bold">to:</span> {{mail.addresses.to}}</p>

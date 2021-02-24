@@ -5,8 +5,8 @@ export const mailService = {
   createMail,
   pushMail,
   addMail,
-  getMail,
   getMails,
+  getMailById,
 }
 
 const MAIL_KEY = 'mails'
@@ -54,7 +54,9 @@ function addMail(mail) {
   return pushMail(formattedMail)
 }
 
-function getMail(mailId) {}
+function getMailById(mailId) {
+  return storageService.get(MAIL_KEY, mailId)
+}
 
 function getMails() {
   const mails = storageService.query(MAIL_KEY)
