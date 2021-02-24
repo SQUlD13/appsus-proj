@@ -5,6 +5,8 @@
     --l:#A1AF9F;
     --m:#6E7B6C;
     --d:#082C09;
+    --success: #2ecc71;
+    --error: #e74c3c;
 }
 *{
     box-sizing: border-box;
@@ -207,8 +209,12 @@ a:active{
   object-fit: cover;
 }
 
-/* Bold: */
+/* General: */
 
 .bold {
   font-weight: bold;
+}
+
+.success {
+  background-color: var(--success);
 }

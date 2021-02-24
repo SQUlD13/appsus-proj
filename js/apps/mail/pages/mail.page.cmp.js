@@ -2,6 +2,8 @@ import { mailService } from '../../../services/mail.service.js'
 import mailNav from '../cmps/mail-nav.cmp.js'
 import mailList from '../cmps/mail-list.cmp.js'
 import mailBox from '../cmps/mail-box.cmp.js'
+import { eventBus } from '../../../services/event-bus.service.js'
+import { storageService } from '../../../services/async-storage-service.js'
 
 export default {
   template: `
@@ -12,18 +14,24 @@ export default {
           <mail-nav/>
           <mail-list v-if="mails.length" :mails="mails"/>
         </main>
-        <mail-box/>
+        <mail-box v-if="mailBoxOpen" @onCloseMailBox="mailBoxOpen = false"/>
     </section>
     `,
   data() {
     return {
       mails: [],
+      mailBoxOpen: false,
     }
   },
   methods: {
     refreshMails(mails) {
       console.log('refreshing mails', mails)
       this.mails = mails
+    },
+    onChanges(notification) {
+      mailService.getMails().then((mails) => {
+        this.mails = mails
+      })
     },
   },
   components: {
@@ -34,5 +42,8 @@ export default {
   created() {
     const mails = mailService.getMails()
     mails.then(this.refreshMails)
+
+    eventBus.$on('changes', this.onChanges)
+    eventBus.$on('onOpenMailBox', () => (this.mailBoxOpen = true))
   },
 }
