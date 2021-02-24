@@ -11,7 +11,7 @@ const routes = [
         component: mailApp
     },
     {
-        path: '/notes',
+        path: '/keep',
         component: keepApp
     }
 ]

@@ -9,12 +9,11 @@ function query() {
     return storageService.query(KEEP_KEY)
 }
 
-function createNote(txt, type = 'text', color = utilService.createRandomColor()) {
+function createNote({ txt = '', type = 'text', color = utilService.createRandomColor() }) {
     return {
         txt,
         type,
         color,
-        id: utilService.makeId(),
     }
 }
 function getNote(id) {
@@ -24,21 +23,21 @@ function getNote(id) {
         })
 }
 function deleteNote(id) {
-    // query()
-    //     .then(notes => {
-    //         var noteIdx = notes.findIndex(note => note.id === id)
-    //         notes.splice(noteIdx,1)
-    //         storageService.
-    //     })
     return storageService.remove(KEEP_KEY, id)
 }
 function updateNote({ txt, type, color }, id) {
     storageService.put(KEEP_KEY, id)
 }
+function addNote(note) {
+    note.id = utilService.makeId()
+    return storageService.post(KEEP_KEY, note)
+}
+
 export const keepService = {
     query,
     createNote,
     getNote,
+    addNote,
     updateNote,
     deleteNote,
     createNotes
@@ -46,8 +45,8 @@ export const keepService = {
 
 function createNotes() {
     var notes = [
-        createNote('Hello'),
-        createNote('doin ok?')
+        addNote(createNote('Hello')),
+        addNote(createNote('doin ok?'))
     ]
     localStorage.setItem(KEEP_KEY, JSON.stringify(notes))
     return notes
