@@ -39,6 +39,7 @@ export default {
             this.content = txt
         },
         toggleActive() {
+            console.log('closing new note')
             this.content = ''
             this.isActive = !this.isActive;
         }

@@ -62,7 +62,7 @@
     border-width: 3px 0 3px 0;
     margin:5px;
 }
-.note .add-list-btn{
+.note .add-btn{
     align-self: center;
 }
 .note-content-list .note-text:focus{
