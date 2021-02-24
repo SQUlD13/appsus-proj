@@ -1,84 +1,73 @@
-:root {
-  --white: #eee;
-  --black: #002d43;
-  --s: #005b73;
-  --l: #a1af9f;
-  --m: #6e7b6c;
-  --d: #082c09;
-  --success: #2ecc71;
-  --error: #e74c3c;
+:root{
+    --white:#F2FCF0;
+    --black:#002D43;
+    --s:#005B73;
+    --l:#A1AF9F;
+    --m:#6E7B6C;
+    --d:#082C09;
+    --success: #2ecc71;
+    --error: #e74c3c;
 }
-* {
-  box-sizing: border-box;
+*{
+    box-sizing: border-box;
 }
-body,
-textarea {
-  margin: 0;
-  font-family: arial;
-  background: var(--white);
+body,textarea{
+    margin:0;
+    font-family: arial;
+    background:var(--white);
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  margin-block-start: 0;
-  margin-block-end: 0;
-  font-size: 1rem;
+h1,h2,h3,h4,h5,h6,p{
+    margin-block-start: 0;
+    margin-block-end: 0;
+    font-size:1rem;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: 1.4em;
-  font-weight: bold;
-  color: var(--black);
-  margin-block-end: 5px;
+h1,h2,h3,h4,h5,h6{
+    font-size: 1.4em;
+    font-weight: bold;
+    color:var(--black);
+    margin-block-end:5px;
 }
-p {
-  font-weight: normal;
-  color: var(--m);
-  filter: brightness(1.2);
+p{
+    font-weight: normal;
+    color:var(--m);
+    filter:brightness(1.2);
 }
-a {
-  font-weight: bold;
-  color: var(--m);
-  text-decoration: none;
+a{
+    font-weight: bold;
+    color:var(--m);
+    text-decoration: none;
 }
-a:hover {
-  color: var(--s);
-  font-style: italic;
+a:hover{
+    color:var(--s);
+    font-style: italic;
 }
-a:active {
-  color: var(--d);
+a:active{
+    color:var(--d);
 }
-.btn {
-  cursor: pointer;
-  outline: 0;
-  padding: 5px;
-  margin: 5px;
-  border-radius: 5px;
-  border: 3px transparent solid;
-  background: var(--black);
-  color: var(--white);
-  transition: background 0.25s ease;
+.btn{
+    cursor: pointer;
+    position:relative;
+    outline:0;
+    padding:5px;
+    margin:5px;
+    border-radius: 5px;
+    border:3px transparent solid;
+    background: var(--black);
+    color:var(--white);
+    transition:background .25s ease;
 }
-.btn:hover {
-  box-shadow: 0 0 5px 3px rgba(255, 250, 250, 0.5);
-  background: var(--s);
-  font-style: italic;
-  transition: background 0.25s ease;
+.btn:hover{
+    box-shadow: 0 0 5px 3px rgba(255, 250, 250, 0.5);
+    background:var(--s);
+    font-style: italic;
+    transition:background .25s ease;
 }
-.btn:active {
-  background: var(--black);
-  color: var(--k);
+.btn:active{
+    background: var(--black);
+    color:var(--k);
 }
-.btn:focus {
-  border: 3px rgba(255, 250, 250, 0.75) solid;
+.btn:focus{
+    border:3px rgba(255, 250, 250, 0.75) solid;
 }
 
 ::-webkit-scrollbar {
@@ -91,7 +80,7 @@ a:active {
 }
 ::-webkit-scrollbar-thumb {
   background-clip: padding-box;
-  background: var(--main-color-m);
+  background: var(--s);
   border-radius: 6px;
   transition: color 0.5s ease;
 }
