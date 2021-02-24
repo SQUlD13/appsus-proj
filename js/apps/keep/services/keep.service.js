@@ -10,6 +10,7 @@ function query() {
 }
 
 function createNote({ txt = '', type = 'text', color = utilService.createRandomColor() }) {
+    console.log('creating note with color', color)
     return {
         txt,
         type,
@@ -44,10 +45,15 @@ export const keepService = {
 }
 
 function createNotes() {
+
     var notes = [
         addNote(createNote('Hello')),
-        addNote(createNote('doin ok?'))
+        addNote(createNote({ txt: 'doin ok ?', type: 'todo' }))
     ]
-    localStorage.setItem(KEEP_KEY, JSON.stringify(notes))
-    return notes
+    return Promise.all(notes).then(ans => {
+        console.log("🚀 ~ file: keep.service.js ~ line 54 ~ Promise.all ~ ans", ans)
+        localStorage.setItem(KEEP_KEY, JSON.stringify(ans))
+        return Promise.resolve(ans)
+    })
+
 }

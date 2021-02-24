@@ -29,7 +29,8 @@ export default {
         keepService.query()
             .then(notes => {
                 if (!notes || notes.length < 1) {
-                    this.notes = keepService.createNotes()
+                    keepService.createNotes()
+                        .then(notes => this.notes = notes)
                 } else this.notes = notes
             })
         this.newNote = keepService.createNote({})

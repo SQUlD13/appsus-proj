@@ -10,13 +10,22 @@ export default {
             <textarea class="note-text" type="text" v-model="txt" v-on:input="onValueChange" />
         </div>
 
+        <button ref="color-btn" class="btn center color-select-btn" >
+            <div class="note-color-input-wrapper" :style="background">
+                <input type="color" id="note-color" v-model="color" />
+            </div>
+            <p class="palette-icon" :style="'color:'+this.color+';'">&#xf53f;</p>
+        </button>
+
         <button class="btn delete-btn" @click="$emit('delete-note',note.id)">
             <svg class="icon" height="10" width="10">
                 <path id="mainDiagonal" d="M10 0 L0 10" stroke="firebrick" stroke-width="3" stroke-linecap="round"/>
                 <path id="secondaryDiagonal" d="M0 0 L10 10" stroke="firebrick" stroke-width="3" stroke-linecap="round"/>
             </svg>
         </button>
-        <pre>{{note}}</pre>
+        <pre>{{note}}
+            {{background}}
+        </pre>
     </div>
     `,
     data() {
@@ -39,5 +48,5 @@ export default {
             console.log('value changed to', event.target.value)
             this.$emit('change-txt', event.target.value)
         }
-    }
+    },
 }

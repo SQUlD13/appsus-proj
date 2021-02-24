@@ -1,6 +1,7 @@
 import { keepService } from '../services/keep.service.js'
 import { eventBus } from '../../../services/event-bus.service.js'
 import note from './note.cmp.js'
+import { utilService } from '../../../services/util.service.js'
 
 export default {
     template: `
@@ -12,7 +13,7 @@ export default {
             </svg>
         </button>  
         <div v-if="isActive" class="new-note">
-            <note :note="this.note" @delete-note="isActive = !isActive" @change-txt="updatecontent"/>
+            <note :note="this.note" @delete-note="isActive = !isActive" @change-txt="updateContent"/>
             <button class="btn add-btn" @click="addNote">Add Note</button>
         </div>
         <pre>{{note}} Active:{{isActive}}</pre>
@@ -24,14 +25,14 @@ export default {
             plusColor: '#fff',
             content: '',
             type: '',
+            color: utilService.createRandomColor()
         }
     },
     methods: {
         addNote() {
             this.$emit('add-note', this.note)
         },
-        updatecontent(txt) {
-            console.log("🚀 ~ file: note-add.cmp.js ~ line 35 ~ updatecontent ~ txt", txt)
+        updateContent(txt) {
             this.content = txt
         }
     },
