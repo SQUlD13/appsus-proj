@@ -51,12 +51,27 @@ function debounce(func, wait) {
     };
 };
 
+function createRandomColor() {
+    var color = '#'
+    for (var i = 0; i < 6; i++) {
+        color += _getRandColorVal()
+    }
+    return color
+}
+
 export const utilService = {
     getRandomInt,
     makeLorem,
     makeId,
     capitalize,
-    debounce
+    debounce,
+    createRandomColor
+}
+
+function _getRandColorVal() {
+    const VALUES = '0123456789abcdef'
+    var rndIndex = parseInt(Math.random() * VALUES.length)
+    return VALUES.charAt(rndIndex)
 }
 
 function _getRandChar() {
