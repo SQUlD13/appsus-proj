@@ -1,76 +1,80 @@
-
-
 function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min)) + min //The maximum is exclusive and the minimum is inclusive
 }
 
 function makeId(length = 5) {
-    var text = '';
-    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var text = ''
+  var possible =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
-    for (var i = 0; i < length; i++)
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
+  for (var i = 0; i < length; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length))
 
-    return text;
+  return text
 }
 
 function capitalize(str) {
-    return str.split(' ').map(word => { return word.charAt(0).toUpperCase() + word.slice(1) }).join(' ')
+  return str
+    .split(' ')
+    .map((word) => {
+      return word.charAt(0).toUpperCase() + word.slice(1)
+    })
+    .join(' ')
 }
 
 function makeLorem(length) {
+  var randStr = ''
+  while (randStr.length < length) {
+    var wordLength = getRandomInt(3, 6)
+    var word = _createWord(wordLength)
 
-    var randStr = '';
-    while (randStr.length < length) {
-        var wordLength = getRandomInt(3, 6);
-        var word = _createWord(wordLength);
+    if (Math.random() > 0.9) word += ','
 
-        if (Math.random() > 0.9) word += ',';
+    randStr += word + ' '
+  }
+  randStr = randStr.substring(0, length)
+  randStr = randStr[0].toUpperCase() + randStr.substr(1)
 
-        randStr += word + ' ';
-    }
-    randStr = randStr.substring(0, length);
-    randStr = randStr[0].toUpperCase() + randStr.substr(1)
-
-    return randStr;
+  return randStr
 }
 
 function debounce(func, wait) {
-    let timeout;
+  let timeout
 
-    return function (...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
+  return function (...args) {
+    const later = () => {
+      clearTimeout(timeout)
+      func(...args)
+    }
 
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-};
+    clearTimeout(timeout)
+    timeout = setTimeout(later, wait)
+  }
+}
 
 export const utilService = {
-    getRandomInt,
-    makeLorem,
-    makeId,
-    capitalize,
-    debounce
+  getRandomInt,
+  makeLorem,
+  makeId,
+  capitalize,
+  debounce,
+  getTimestamp,
 }
 
 function _getRandChar() {
-    var LETTERS = 'abcdefghijklmnopqrstuvwxyz';
-    var randIndex = parseInt(Math.random() * LETTERS.length)
-    return LETTERS.charAt(randIndex);
+  var LETTERS = 'abcdefghijklmnopqrstuvwxyz'
+  var randIndex = parseInt(Math.random() * LETTERS.length)
+  return LETTERS.charAt(randIndex)
 }
 
 function _createWord(length) {
-    var word = '';
-    while (word.length < length) {
-        var randChar = _getRandChar();
-        word += randChar;
-    }
+  var word = ''
+  while (word.length < length) {
+    var randChar = _getRandChar()
+    word += randChar
+  }
 
-    return word;
+  return word
 }
