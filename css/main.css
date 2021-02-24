@@ -3,6 +3,7 @@
 
 /* mail imports: */
 @import url('apps/mail/mail-card.css');
+@import url('apps/mail/mail-box.cmp.css');
 
 .main-container {
   max-width: 1080px;
