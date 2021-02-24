@@ -205,3 +205,9 @@ a:active{
 .fit-cover {
   object-fit: cover;
 }
+
+/* Bold: */
+
+.bold {
+  font-weight: bold;
+}
