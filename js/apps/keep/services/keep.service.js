@@ -9,7 +9,7 @@ function query() {
     return storageService.query(KEEP_KEY)
 }
 
-function createNote({ txt = '', isList = false, color = utilService.createRandomColor() }) {
+function createNote({ txt = '', isList = false, color = utilService.createRandomColor(), textColor = '#222' }) {
     console.log('creating note with color', color)
     return {
         content: [{
@@ -18,6 +18,7 @@ function createNote({ txt = '', isList = false, color = utilService.createRandom
         }],
         isList,
         color,
+        textColor
     }
 }
 function getNote(id) {

@@ -3,23 +3,24 @@ import { eventBus } from '../../../services/event-bus.service.js'
 import addBtn from '../../../cmps/add-btn.cmp.js'
 import deleteBtn from '../../../cmps/delete-btn.cmp.js'
 import noteControls from './note-controls.cmp.js'
+import { utilService } from '../../../services/util.service.js'
 
 export default {
     props: ['id', 'notedata'],
     template: `
     <div v-if="note" class="note" :style="background">
         <div v-if="!note.isList" class="note-content">
-            <textarea v-if="note.content" class="note-text"  v-model="note.content[0].txt" v-on:input="onValueChange($event,note.id)" />
+            <textarea v-if="note.content" class="note-text" :style="this.textStyle" v-model="note.content[0].txt" v-on:input="onValueChange($event.target.value,note.content[0].id)" />
         </div>
         <ul v-else class="note-content-list">
             <li v-for="text in note.content" class="note-content" :key="text.id">
-                <textarea v-if="text" class="note-text" v-model="text.txt" />
+                <textarea v-if="text" class="note-text" v-model="text.txt" :style="this.textStyle" />
                 <delete-btn @delete="deleteContentListItem(text.id)" />                
             </li>
             <add-btn @add="addContentListItem(note.id)"/>
         </ul>
 
-        <note-controls @toggle-list="toggleList" v-model="color" :isList="this.isList" @delete-note="$emit('delete-note')"></note-controls>
+        <note-controls :note="note" @toggle-list="toggleList" @background-change="updateBackground" @delete-note="$emit('delete-note',this.id)"></note-controls>
 </div>
     `,
     data() {
@@ -27,6 +28,7 @@ export default {
             note: null,
             color: null,
             isList: false,
+            textColor: null
         }
     },
     created() {
@@ -37,6 +39,7 @@ export default {
                     this.note = note
                     this.color = note.color
                     this.isList = note.isList
+                    this.textColor = note.textColor
                 })
         }
         else {
@@ -54,11 +57,23 @@ export default {
         background() {
             return `background :` + this.color + ';'
         },
+        textStyle() {
+            return `color:` + this.textColor + ';'
+        }
     },
     methods: {
-        onValueChange(event, id) {
-            console.log('value changed to', event.target.value, id)
-            this.$emit('change-txt', event.target.value, id)
+        onValueChange(val, id) {
+            console.log("🚀 ~ file: note.cmp.js ~ line 65 ~ onValueChange ~ val", val)
+            // console.log('value changed to', event.target.value, id)
+            // this.$emit('change-txt', event.target.value, id)
+            keepService.getNote(this.id)
+                .then(note => {
+                    var idx = note.content.findIndex(text => text.id === id)
+                    var obj = { txt: val, id: utilService.makeId() }
+                    note.content.splice(idx, 1, obj)
+                    keepService.updateNote(note)
+                })
+
         },
         toggleList() {
             this.note.isList = !this.note.isList
@@ -81,6 +96,9 @@ export default {
                     keepService.updateNote(note)
                         .then(console.log('delete success EventBus Message - note.cmp line 98'))
                 })
+        },
+        updateBackground({ color }) {
+            this.color = color
         }
     },
     components: { addBtn, deleteBtn, noteControls }
