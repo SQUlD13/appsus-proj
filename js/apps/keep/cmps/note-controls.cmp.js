@@ -15,7 +15,7 @@ export default {
             <button class="btn invert-btn list-toggle-btn" @click="$emit('toggle-list')" :style="background">
                 <p class="fas invert-btn list-icon" v-html="this.listContent" :style="color">{{listContent}}</p>
             </button>
-            <delete-btn @delete="$emit('delete-note')" :info="this.info" :key="info.color"/>
+            <delete-btn @delete="$emit('delete-note')" :info="{color: this.invertedColor}" :key="note.id" />
         </div>
     </div>
     `,
@@ -38,6 +38,9 @@ export default {
                 color: this.invertedColor
             }
         }
+    },
+    watch: {
+
     },
     components: { deleteBtn }
 }
