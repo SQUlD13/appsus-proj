@@ -36,6 +36,7 @@
 }
 .note-text p{
     width:100%;
+    cursor: pointer;
 }
 
 .note-text{
