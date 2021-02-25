@@ -13,20 +13,24 @@ export default {
         <pre>{{note}}</pre>
 
         <ul :class="contentClass">
-            <note-images  @delete-note-item="$emit('delete-content-line',this.id,noteId) " :note="note" 
-            @click.native="(lineId)=>$emit('delete-note-item',id,lineId)" />
+            <note-images :note="note" 
+            @delete-img="(lineId)=>$emit('delete-note-item',note.id,lineId,'img')" />
 
-            <li v-if="note.content" v-for="content in note.content" class="note-content" :key="content.id">
-                <textarea  v-if="content.txt || content.txt === ''" class="note-text" v-model="content.txt" :style="getStyle(content.active)" 
-                v-on:input="$emit('text-change',note.id,content.id,$event.target.value)" @click="toggleItem(content.id)"/>
-                <delete-btn v-if="(content.txt || content.txt === '') && note.isList" @delete="$emit('delete-note-item',note.id,content.id)" />                
+            <li v-for="txt in note.txt" :key="txt.id">
+                <textarea  v-if="txt.txt || txt.txt === ''" class="note-text" v-model="txt.txt" :style="getStyle(txt.active)" 
+                v-on:input="$emit('text-change',note.id,txt.id,$event.target.value)" @click="toggleItem(txt.id)"/>
+                <delete-btn v-if="(txt.txt || txt.txt === '') && note.isList" @delete="$emit('delete-note-item',note.id,txt.id,'txt')" />                
             </li>
+
+            <!-- <li v-if="note.img" v-for="img in note.img" class="note-img" :key="img.id">
+                
+            </li> -->
 
             <add-btn v-if="this.note.isList" @add="$emit('add-empty-line',note.id)"  />
         </ul>
 
-        <note-controls :note="note" @toggle-list="$emit('toggle-list',note.id)" @background-change="$emit('background-change',note.id,note.color)" @delete-note="$emit('delete-note',id)" 
-        @background-save="saveNote"></note-controls>
+        <note-controls :note="note" @toggle-list="$emit('toggle-list',note.id)" @background-change="$emit('background-change',note.id,note.color)" 
+        @delete-note="$emit('delete-note',note.id)" @background-save="saveNote"></note-controls>
 </div>
     `,
     data() {
@@ -34,22 +38,6 @@ export default {
             color: this.note.color || utilService.createRandomColor(),
         }
     },
-    // created() {
-    //     if (!this.notedata) {
-    //         console.log('no notedata param')
-    //         keepService.getNote(this.id)
-    //             .then(note => {
-    //                 this.note = note
-    //                 this.color = note.color
-    //                 this.isList = note.isList
-    //                 this.textColor = note.textColor
-    //             })
-    //     }
-    //     else {
-    //         this.note = keepService.createNote(this.notedata)
-    //         this.color = this.note.color
-    //     }
-    // },
     computed: {
         txt() {
             return ((this.note.content.txt && this.note.content.txt[0])) ? this.note.content[0].txt : ''

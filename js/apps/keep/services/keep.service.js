@@ -32,21 +32,21 @@ function addNote(note) {
     //if (!note.id) note.id = utilService.makeId()
     return storageService.post(KEEP_KEY, note)
 }
-function addContentItem(id) {
+function addEmptyText(id) {
     return storageService.get(KEEP_KEY, id)
         .then(note => {
-            note.content = [...note.content, { txt: ' ', id: utilService.makeId() }]
+            note.txt.push({ txt: ' ', id: utilService.makeId(), active: true })
             return storageService.put(KEEP_KEY, note)
                 .then(() => Promise.resolve(note))
         })
 }
-function deleteContentItem(noteId, contentId) {
+function deleteContentItem(noteId, contentId, type) {
     return storageService.get(KEEP_KEY, noteId)
         .then(note => {
-            if (note.content.length > 1) {
+            if ((note[type].length > 1 && type === 'txt') || type !== 'txt') {
                 console.log('deleting content line')
-                var contentIdx = note.content.findIndex(content => content.id === contentId)
-                note.content.splice(contentIdx, 1)
+                var contentIdx = note[type].findIndex(content => content.id === contentId)
+                note[type].splice(contentIdx, 1)
                 this.note = note
                 return keepService.updateNote(note)
                     .then(() => Promise.resolve(note))
@@ -63,7 +63,7 @@ export const keepService = {
     updateNote,
     deleteNote,
     createNotes,
-    addContentItem,
+    addEmptyText,
     deleteContentItem
 }
 
@@ -72,9 +72,8 @@ function createNotes() {
     var notes = [
         addNote(createNote({ txt: ['Hello'] })),
         addNote(createNote({ txt: ['doin ok ?'], isList: true })),
-        addNote(createNote({ url: [DEMO_IMG] })),
-        addNote(createNote({ url: [DEMO_GIF, DEMO_IMG] })),
-        addNote(createNote({ txt: [' '], id: 'note-add' })),
+        addNote(createNote({ img: [DEMO_IMG] })),
+        addNote(createNote({ img: [DEMO_GIF, DEMO_IMG] })),
     ]
     return Promise.all(notes).then(ans => {
         console.log("🚀 ~ file: .service.js ~ line 54 ~ Promise.all ~ ans", ans)
@@ -83,22 +82,27 @@ function createNotes() {
     })
 }
 
-function createNote({ txt = [''], url = [''], isList = false, color = utilService.createRandomColor(), active = true, id }) {
+function createNote({ txt = [''], img = [], vid = [], isList = false, color = utilService.createRandomColor(), active = true, id }) {
 
     var obj = {
         id: id,
         isList,
         color,
+        active,
     }
-    console.log("🚀 ~ file: keep.service.js ~ line 93 ~ createNote ~ obj", obj)
     var txtArr = _createNoteItem(txt, 'txt', active)
-    if (!txtArr.length) txtArr = [{ txt: ' ' }]
-    var content = []
-    var urlArr = _createNoteItem(url, 'url')
-    content.url = urlArr
-    content = txtArr.concat(urlArr)
-    obj.content = content
-    console.log('PLEASE', id)
+    if (!txtArr.length) txtArr = [{ txt: ' ', id: utilService.makeId(), active }]
+    obj.txt = txtArr
+    var imgArr = []
+    if (img.length) {
+        var imgArr = img.map(item => {
+            return {
+                id: utilService.makeId(),
+                url: item
+            }
+        })
+    }
+    obj.img = imgArr
     if (!id) {
         obj.id = utilService.makeId()
     }
@@ -106,7 +110,7 @@ function createNote({ txt = [''], url = [''], isList = false, color = utilServic
 }
 
 function _createNoteItem(item, type, active = false) {
-    if (item[0]) {
+    if (item) {
         if (!item.length) item = [item]
         var Arr = []
         item.forEach(element => {

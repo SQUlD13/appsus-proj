@@ -55,18 +55,19 @@ export default {
                     this.updateNotes()
                 })
         },
-        deleteContentItem(noteId, itemId) {
-            keepService.deleteContentItem(noteId, itemId)
+        deleteContentItem(noteId, itemId, type) {
+            keepService.deleteContentItem(noteId, itemId, type)
                 .then(() => { this.updateNotes() })
                 .catch(console.log())
         },
         addEmptyContentItem(noteId) {
-            keepService.addContentItem(noteId)
+            keepService.addEmptyText(noteId)
                 .then(() => { this.updateNotes() })
         },
         toggleList(noteId) {
             keepService.getNote(noteId)
                 .then(note => {
+                    console.log("🚀 ~ file: keep.page.cmp.js ~ line 70 ~ toggleList ~ note", note)
                     note.isList = !note.isList
                     keepService.updateNote(note)
                         .then(() => { this.updateNotes() })
@@ -75,12 +76,12 @@ export default {
         toggleItem(noteId, itemId) {
             keepService.getNote(noteId)
                 .then(note => {
-                    var idx = note.content.findIndex(text => {
+                    var idx = note.txt.findIndex(text => {
                         return text.id === itemId
                     })
-                    var content = note.content[idx]
-                    content.active = !content.active
-                    note.content.splice(idx, 1, content)
+                    var txt = note.txt[idx]
+                    txt.active = !txt.active
+                    note.txt.splice(idx, 1, txt)
                     keepService.updateNote(note)
                         .then(() => { this.updateNotes() })
                 })

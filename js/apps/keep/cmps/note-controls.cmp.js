@@ -15,6 +15,9 @@ export default {
             <button class="btn invert-btn list-toggle-btn" @click="$emit('toggle-list')" :style="background">
                 <p class="fas invert-btn list-icon" v-html="this.listContent" :style="color">{{listContent}}</p>
             </button>
+            <button class="btn invert-btn img-add-btn" :style="background">
+                <p class="fas invert-btn" :style="color">'&#xf302;</p>
+            </button>
             <delete-btn @delete="$emit('delete-note')" :info="{color: this.invertedColor}" :key="note.id" />
         </div>
     </div>
