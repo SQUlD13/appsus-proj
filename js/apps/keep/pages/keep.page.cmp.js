@@ -30,7 +30,7 @@ export default {
     created() {
         keepService.query()
             .then(notes => {
-                if (!notes || notes.length < 1) {
+                if (!notes || notes.length <= 1) {
                     keepService.createNotes()
                         .then(notes => this.notes = notes)
                 } else this.notes = notes
@@ -89,6 +89,7 @@ export default {
                 })
         },
         updateText(noteId, itemId, val) {
+            console.log("🚀 ~ file: keep.page.cmp.js ~ line 92 ~ updateText ~ val", val)
             keepService.getNote(noteId)
                 .then(note => {
                     var idx = note.txt.findIndex(text => text.id === itemId)
@@ -96,7 +97,7 @@ export default {
                     var obj = { txt: val, id: text.id, active: text.active }
                     note.txt.splice(idx, 1, obj)
                     keepService.updateNote(note)
-                    //.then(() => { this.updateNotes() })
+                        .then(() => { this.updateNotes() })
                 })
         },
         updateBackground(noteId, color) {

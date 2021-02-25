@@ -108,7 +108,9 @@ function createNotes() {
 
     var notes = [
         addNote(createNote({ txt: ['Hello'] })),
-        addNote(createNote({ txt: ['doin ok ?', 'remember to bust some caps'], isList: true })),
+        addNote(createNote({
+            txt: ['doin ok ?doin ok ?doin ok ?doin ok ?doin ok ?doin ok ?doin ok ?doin ok ?doin ok ?doin ok ? doin ok ??doin ok ?doin ok ? doin ok ?', 'remember to bust some caps'], isList: true
+        })),
         addNote(createNote({ img: [DEMO_GIFS[1]], txt: ['WHY SO SERIOUS'] })),
         addNote(createNote({ img: [DEMO_GIFS[0], DEMO_IMG] })),
         createNote({ content: [{ txt: '' }], id: 'note-add' })

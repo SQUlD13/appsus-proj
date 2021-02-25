@@ -20,9 +20,6 @@ export default {
             </button>
             <delete-btn @delete="$emit('delete-note')" :info="{color: this.invertedColor}" :key="note.id" />
         </div>
-        <pre >
-         search type {{this.search}}
-        </pre>
         <form v-if="search" @submit="$emit('add-'+search, searchVal)">
             <input v-model="searchVal" type="text" >
             <button type="submit"> submit </button>

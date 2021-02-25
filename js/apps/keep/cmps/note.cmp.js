@@ -2,6 +2,7 @@ import { keepService } from '../services/keep.service.js'
 import { eventBus } from '../../../services/event-bus.service.js'
 import addBtn from '../../../cmps/add-btn.cmp.js'
 import deleteBtn from '../../../cmps/delete-btn.cmp.js'
+import longText from '../../../cmps/long-text.cmp.js'
 import noteImages from './note-images.cmp.js'
 import noteControls from './note-controls.cmp.js'
 import { utilService } from '../../../services/util.service.js'
@@ -10,15 +11,15 @@ export default {
     props: ['note',],
     template: `
     <div class="note" :style="background">
-        <pre>{{note}}</pre>
 
         <ul :class="contentClass">
             <note-images :note="note" 
             @delete-img="(lineId)=>$emit('delete-note-item',note.id,lineId,'img')" />
 
             <li v-for="txt in note.txt" :key="txt.id">
-                <textarea  v-if="txt.txt || txt.txt === ''" class="note-text" v-model="txt.txt" :style="getStyle(txt.active)" 
-                v-on:input="$emit('text-change',note.id,txt.id,$event.target.value)" @click="toggleItem(txt.id)"/>
+                <long-text v-if="txt.txt || txt.txt === ''" :value="txt.txt" class="note-text" :style="getStyle(txt.active)" 
+                 @update-text="(val)=>{$emit('text-change',note.id,txt.id,val)}" @click="toggleItem(txt.id)" /> 
+
                 <delete-btn v-if="(txt.txt || txt.txt === '') && note.isList" @delete="$emit('delete-note-item',note.id,txt.id,'txt')" />                
             </li>
 
@@ -70,5 +71,5 @@ export default {
             if (this.note.isList) this.$emit('toggle-item', this.note.id, contentId)
         }
     },
-    components: { addBtn, deleteBtn, noteControls, noteImages }
+    components: { addBtn, deleteBtn, longText, noteControls, noteImages }
 }
