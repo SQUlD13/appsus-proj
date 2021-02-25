@@ -22,15 +22,11 @@ export default {
                 <delete-btn v-if="(txt.txt || txt.txt === '') && note.isList" @delete="$emit('delete-note-item',note.id,txt.id,'txt')" />                
             </li>
 
-            <!-- <li v-if="note.img" v-for="img in note.img" class="note-img" :key="img.id">
-                
-            </li> -->
-
             <add-btn v-if="this.note.isList" @add="$emit('add-empty-line',note.id)"  />
         </ul>
 
         <note-controls :note="note" @toggle-list="$emit('toggle-list',note.id)" @background-change="$emit('background-change',note.id,note.color)" 
-        @delete-note="$emit('delete-note',note.id)" @background-save="saveNote"></note-controls>
+        @delete-note="$emit('delete-note',note.id)" @background-save="saveNote" @add-img="(url)=>$emit('add-img',note.id,url)"></note-controls>
 </div>
     `,
     data() {

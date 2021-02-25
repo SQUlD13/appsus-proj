@@ -12,8 +12,9 @@ export default {
         <add-btn @add="this.toggleActive" ></add-btn>
         <transition name="slide-down">
         <div v-if="isActive" class="new-note">
-            <note :note="this.note" @delete-note="toggleActive()" @change-txt="updateContent"/>
-            <button class="btn add-btn" @click="addNote">Add Note</button>
+            <note :note="this.note" @delete-note="toggleActive()" @change-txt="updateContent" @add-img="(url)=>$emit('add-img',note.id,url)"/>
+            
+            <button class="btn add-btn" @click="addNote" @>Add Note</button>
         </div>
         </transition>
     </section>
