@@ -12,13 +12,12 @@ export default {
         <ul v-if="notes" class="clean-list note-list">
             <!-- <transition-group name="list-column"> -->
                 <li v-for="note in notes" :key="note.id">
-                    <note v-if="note.id !== 'note-add'":note="note" @delete-note="deleteNote" @add-note="addNote" @update-notes="updateNotes" 
+                    <note  v-if="note.id !== 'note-add'" :note="note" @delete-note="deleteNote" @add-note="addNote" @update-notes="updateNotes" 
                     @delete-note-item="deleteContentItem" @toggle-list="toggleList" @add-empty-line="addEmptyContentItem" @toggle-item="toggleItem" 
                     @text-change="updateText" @background-change="updateBackground" @add-img="addImage"/>
                 </li>
             <!-- </transition-group> -->
         </ul>
-    <pre>{{this.notes}}</pre>
     </section>
     `,
     data() {
@@ -32,7 +31,14 @@ export default {
             .then(notes => {
                 if (!notes || notes.length <= 1) {
                     keepService.createNotes()
-                        .then(notes => this.notes = notes)
+                        .then(notes => {
+                            var newNote = keepService.createNote({ txt: [' '], id: 'note-add', editing: [0] })
+                            console.log("🚀 ~ file: keep.page.cmp.js ~ line 37 ~ created ~ newNote", newNote)
+                            notes.push(newNote)
+                            this.notes = notes
+                            this.newNote = newNote
+                            keepService.updateNote(newNote)
+                        })
                 } else this.notes = notes
                 this.newNote = notes.find(notes => notes.id === 'note-add')
             })
@@ -94,7 +100,7 @@ export default {
                 .then(note => {
                     var idx = note.txt.findIndex(text => text.id === itemId)
                     var text = note.txt[idx]
-                    var obj = { txt: val, id: text.id, active: text.active }
+                    var obj = { txt: val, id: text.id, active: text.active, editing: text.editing }
                     note.txt.splice(idx, 1, obj)
                     keepService.updateNote(note)
                         .then(() => { this.updateNotes() })

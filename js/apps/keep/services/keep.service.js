@@ -68,7 +68,7 @@ function toggleNoteList(note) {
             return text.txt
         }).join('\n')
         note.txt = [{
-            txt: str, id: note.txt[0].id, active: true
+            txt: str, id: note.txt[0].id, active: true, editing: false
         }]
     } else {
         var arr = []
@@ -85,6 +85,7 @@ function toggleNoteList(note) {
                 txt: text,
                 id: utilService.makeId(),
                 active: true,
+                editing: false
             }
         })
         note.txt = txt
@@ -113,33 +114,36 @@ function createNotes() {
         })),
         addNote(createNote({ img: [DEMO_GIFS[1]], txt: ['WHY SO SERIOUS'] })),
         addNote(createNote({ img: [DEMO_GIFS[0], DEMO_IMG] })),
-        createNote({ content: [{ txt: '' }], id: 'note-add' })
     ]
     return Promise.all(notes).then(ans => {
-        keepService.createNote({ content: [{ txt: '' }], id: 'note-add' })
-        console.log("🚀 ~ file: .service.js ~ line 54 ~ Promise.all ~ ans", ans)
         localStorage.setItem(KEEP_KEY, JSON.stringify(ans))
         return Promise.resolve(ans)
     })
 }
 
-function createNote({ txt = [''], img = [], vid = [], isList = false, color = utilService.createRandomColor(), active = true, id }) {
+function createNote({ txt = [''], img = [], vid = [], editing = [], isList = false, color = utilService.createRandomColor(), active = true, id }) {
 
+    // var addNote = keepService.
+    //     notes.push(addNote)
     var obj = {
         id: id,
         isList,
         color,
-        active,
     }
-    var txtArr = _createNoteItem(txt, 'txt', active)
-    if (!txtArr.length) txtArr = [{ txt: ' ', id: utilService.makeId(), active }]
+    var txtArr = _createTextObject(txt, active, editing)
+    if (!txtArr.length) txtArr = [{ txt: ' ', id: utilService.makeId(), active, editing: false }]
     obj.txt = txtArr
+
+
     var imgArr = []
     if (img.length) {
-        var imgArr = img.map(item => {
+        var imgArr = img.map((item, idx) => {
+            var currEdit = false
+            if (editing.includes(idx)) currEdit = true
             return {
                 id: utilService.makeId(),
-                url: item
+                url: item,
+                editing: currEdit
             }
         })
     }
@@ -150,15 +154,20 @@ function createNote({ txt = [''], img = [], vid = [], isList = false, color = ut
     return obj
 }
 
-function _createNoteItem(item, type, active = false) {
-    if (item) {
-        if (!item.length) item = [item]
+function _createTextObject(text, active = false, editing = []) {
+    if (text) {
+        if (!text.length) text = [text]
         var Arr = []
-        item.forEach(element => {
-            var obj = {}
-            obj[type] = element
-            obj.id = utilService.makeId()
-            obj.active = active
+        text.forEach((line, idx) => {
+            var currEdit = false
+            if (editing.includes(idx)) currEdit = true
+            var obj = {
+                txt: line,
+                id: utilService.makeId(),
+                active: active,
+                editing: currEdit,
+            }
+            console.log("🚀 ~ file: keep.service.js ~ line 172 ~ text.forEach ~ obj", obj)
             Arr.push(obj)
         });
         return Arr

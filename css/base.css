@@ -29,7 +29,7 @@ h1,h2,h3,h4,h5,h6{
 }
 p{
     font-weight: normal;
-    color:var(--m);
+    color:var(--d);
     filter:brightness(1.2);
 }
 a{

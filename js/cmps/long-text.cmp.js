@@ -1,23 +1,22 @@
 export default {
-    props: ['value'],
+    props: ['value', 'line', 'isList',],
     template: ` 
     <div class="long-text">
-         <!-- <p>isFull : {{isFull}} 
-             txt : {{this.txt}}
-            description : {{description}}
-            length > 100? {{value.length>100}}
-         </p>  -->
-        <p contentEditable="true" class="long-text" @click="toggleFull" :value="this.txt" v-text="this.description" @input="onEdit" @blur="$emit('update-text',$event.target.innerText)"
-        :style="calcStyle">
-            <!-- :value="this.dispTxt" -->
-             <!-- @input="$emit('input',$event.target.value) -->
+            <!-- <pre>
+            edit :{{this.line.editing}}
+            full :{{this.isFull}} 
+            length>100 : {{this.txt.length>100}}
+            </pre> -->
+    
+        <p :contentEditable="this.line.editing" class="long-text" @click="toggleFull" :value="this.txt" v-html="this.description" @input="onEdit" 
+        @blur="$emit('update-text',$event.target.innerText)" :style="calcStyle">
         </p>
     </div>
     `,
     data() {
         return {
-            isFull: false,
-            txt: this.value
+            fullState: this.line.active,
+            txt: this.value,
         }
     },
     computed: {
@@ -26,12 +25,24 @@ export default {
                 this.txt.substr(0, 99) + '...' : this.txt.substr(0, 99)
         },
         calcStyle() {
-            var str = (this.isFull) ? '' : 'text-decoration:line-through;'
+            var str = (!this.line.editing && !this.line.active) ? 'text-decoration:line-through;' : ''
+            if (this.line.editing) str += 'background:#fff;'
+            return str
+        },
+        isFull() {
+            if (this.line.editing || this.line.active) return true
+            else return this.fullState
+        },
+        classStr() {
+            var str = 'long-text'
+            if (this.line.editing) str += 'editing'
+            return str
         }
     },
     methods: {
         toggleFull() {
-            this.isFull = !this.isFull
+            if (!this.line.editing) this.fullState = !this.fullState
+            if (!this.line.editing && this.isList) this.line.active = !this.line.active
         },
         emit(event) {
             $emit('input', event.target.value)
@@ -40,6 +51,6 @@ export default {
         onEdit(evt) {
             var src = evt.target.innerText
             this.$emit('text-change', src)
-        }
+        },
     },
 }

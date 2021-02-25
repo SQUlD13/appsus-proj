@@ -22,18 +22,8 @@ export default {
     data() {
         return {
             isActive: false,
-            // plusColor: '#fff',
-            // content: '',
-            // type: '',
-            // color: utilService.createRandomColor(),
-            // id: utilService.makeId()
-            //note: null
         }
     },
-    // created() {
-    //     keepService.getNote('note-add')
-    //         .then(note => this.note = note)
-    // },
     methods: {
         addNote() {
             this.$emit('add-note', this.note)
@@ -46,17 +36,6 @@ export default {
             this.content = ''
             this.isActive = !this.isActive;
         }
-    },
-    computed: {
-        // note() {
-        //     var note = {
-        //         txt: [this.content],
-        //         type: this.type,
-        //         color: this.color,
-        //         id: this.id
-        //     }
-        //     return keepService.createNote(note)
-        // }
     },
     components: { note, addBtn }
 }
