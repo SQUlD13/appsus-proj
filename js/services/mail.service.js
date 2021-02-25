@@ -7,6 +7,8 @@ export const mailService = {
   addMail,
   getMails,
   getMailById,
+  changeGeneralPropVal,
+  toggleGeneralPropVal,
 }
 
 const MAIL_KEY = 'mails'
@@ -27,6 +29,8 @@ function createMail(addresses = DEFAULT_ADDRESSES, content = DEFAULT_CONTENT) {
     content,
     general: {
       timestamp: Date.now(),
+      isReaded: false,
+      isMarked: false,
     },
     id: utilService.makeId(),
   }
@@ -67,4 +71,28 @@ function getMails() {
     }
     return resMails
   })
+}
+
+function changeGeneralPropVal(mailId, prop, newVal) {
+  return getMailById(mailId)
+    .then((mail) => {
+      mail.general[prop] = newVal
+      return mail
+    })
+    .then((updatedMail) => {
+      return storageService.put(MAIL_KEY, updatedMail)
+    })
+    .then(() => getMails())
+}
+
+function toggleGeneralPropVal(mailId, prop) {
+  return getMailById(mailId)
+    .then((mail) => {
+      mail.general[prop] = !mail.general[prop]
+      return mail
+    })
+    .then((updatedMail) => {
+      return storageService.put(MAIL_KEY, updatedMail)
+    })
+    .then(() => getMails())
 }

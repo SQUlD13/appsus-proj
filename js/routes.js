@@ -12,6 +12,7 @@ const routes = [
     path: '/mail',
     component: mailApp,
     children: [
+      { path: 'filter-by/:filterBy', component: mailList, props: true },
       {
         path: ':mailId',
         component: mailDetails,
