@@ -11,7 +11,7 @@ export default {
     props: ['note',],
     template: `
     <div class="note" :style="background">
-        <pre>{{note}}</pre>
+        <!-- <pre>{{note}}</pre> -->
         <ul :class="contentClass">
             <note-images :note="note" 
             @delete-img="(lineId)=>$emit('delete-note-item',note.id,lineId,'img')" />
@@ -20,7 +20,7 @@ export default {
                 <long-text v-if="txt.txt || txt.txt === ''" :value="txt.txt" class="note-text" :line="txt" :isList="note.isList" :style="getStyle(txt.active)" 
                  @update-text="(val)=>{$emit('text-change',note.id,txt.id,val)}" @click="toggleItem(txt.id)" /> 
                 <delete-btn v-if="(txt.txt || txt.txt === '') && note.isList" @delete="$emit('delete-note-item',note.id,txt.id,'txt')" />
-                <button class="btn" @click="txt.editing = !txt.editing">edit text</button>                
+                <button v-if="!txt.editing" class="btn" @click="txt.editing = !txt.editing">edit text</button>                
             </li>
 
             <add-btn v-if="this.note.isList" @add="$emit('add-empty-line',note.id)"  />

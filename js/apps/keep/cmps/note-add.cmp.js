@@ -8,7 +8,7 @@ export default {
     props: ['note'],
     template: `
     <section class="note-add">
-        <pre>{{this.note}}</pre>
+        <!-- <pre>{{this.note}}</pre> -->
         <add-btn @add="this.toggleActive" ></add-btn>
         <transition name="slide-down">
         <div v-if="isActive" class="new-note">

@@ -32,16 +32,15 @@ export default {
                 if (!notes || notes.length <= 1) {
                     keepService.createNotes()
                         .then(notes => {
-                            var newNote = keepService.createNote({ txt: [' '], id: 'note-add', editing: [0] })
-                            console.log("🚀 ~ file: keep.page.cmp.js ~ line 37 ~ created ~ newNote", newNote)
                             notes.push(newNote)
+                            console.log("🚀 ~ file: keep.page.cmp.js ~ line 37 ~ created ~ notes", notes)
                             this.notes = notes
-                            this.newNote = newNote
-                            keepService.updateNote(newNote)
+                            //keepService.addNote(newNote)
                         })
                 } else this.notes = notes
-                this.newNote = notes.find(notes => notes.id === 'note-add')
             })
+        var newNote = keepService.createNote({ txt: [' '], id: 'note-add', editing: [0] })
+        this.newNote = newNote
     },
     methods: {
         deleteNote(id) {

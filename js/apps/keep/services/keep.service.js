@@ -19,7 +19,6 @@ function query() {
         })
 }
 
-
 function getNote(id) {
     console.log("🚀 ~ file: keep.service.js ~ line 24 ~ getNote ~ id", id)
     return query()
@@ -102,7 +101,7 @@ export const keepService = {
     createNotes,
     addEmptyText,
     deleteContentItem,
-    toggleNoteList
+    toggleNoteList,
 }
 
 function createNotes() {
@@ -112,16 +111,20 @@ function createNotes() {
         addNote(createNote({
             txt: ['doin ok ?doin ok ?doin ok ?doin ok ?doin ok ?doin ok ?doin ok ?doin ok ?doin ok ?doin ok ? doin ok ??doin ok ?doin ok ? doin ok ?', 'remember to bust some caps'], isList: true
         })),
-        addNote(createNote({ img: [DEMO_GIFS[1]], txt: ['WHY SO SERIOUS'] })),
+        addNote(createNote({ img: [DEMO_GIFS[1]], txt: ['WHY SO SERIOUS'], pinned: true })),
         addNote(createNote({ img: [DEMO_GIFS[0], DEMO_IMG] })),
     ]
+    console.log("🚀 ~ file: keep.service.js ~ line 118 ~ createNotes ~ notes", notes)
     return Promise.all(notes).then(ans => {
+        console.log("🚀 ~ file: keep.service.js ~ line 119 ~ returnPromise.all ~ ans", ans)
         localStorage.setItem(KEEP_KEY, JSON.stringify(ans))
         return Promise.resolve(ans)
     })
 }
 
-function createNote({ txt = [''], img = [], vid = [], editing = [], isList = false, color = utilService.createRandomColor(), active = true, id }) {
+function createNote({ txt = [''], img = [], vid = [], editing = [],
+    isList = false, color = utilService.createRandomColor(),
+    active = true, id, pinned = false }) {
 
     // var addNote = keepService.
     //     notes.push(addNote)
@@ -129,6 +132,7 @@ function createNote({ txt = [''], img = [], vid = [], editing = [], isList = fal
         id: id,
         isList,
         color,
+        pinned
     }
     var txtArr = _createTextObject(txt, active, editing)
     if (!txtArr.length) txtArr = [{ txt: ' ', id: utilService.makeId(), active, editing: false }]
