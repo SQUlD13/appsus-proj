@@ -5,7 +5,7 @@ export default {
     props: ['note'],
     template: `
     <div class="note-controls">
-    <pre>{{note}}</pre>
+    <!-- <pre>{{note}}</pre> -->
         <div class="main-note-controls">
             <button class="btn center invert-btn" >
                 <div class="note-color-input-wrapper" :style="background">
@@ -24,7 +24,7 @@ export default {
             </button>
             <delete-btn @delete="$emit('delete-note')" :info="{color: this.invertedColor}" :key="note.id" />
             <button class="btn pin-note-btn" :style="this.pinStyle" >
-                <p class="invert-btn fas" :style="color" @click="$emit('pin-note')">'&#xf08d;'</p>
+                <p class="invert-btn fas" :style="color" @click="$emit('pin-note')">&#xf08d;</p>
             </button>
         </div>
 

@@ -18,17 +18,17 @@ export default {
             @delete-img="(lineId)=>{deleteLine(lineId,'img')}" />
              <!-- @delete-img="(lineId)=>$emit('delete-note-item',note.id,lineId,'img')" -->
 
-            <note-videos :videos="note.vid" @delete-vid="(vidId)=>{deleteLine(vidId,'vid')}">
+            <note-videos :videos="note.vid" 
+            @delete-vid="(vidId)=>{deleteLine(vidId,'vid')}" />
                 
-            </note-videos>
 
-            <li v-for="txt in note.txt" :key="txt.id">
+            <li class="note-item" v-for="txt in note.txt" :key="txt.id">
                 <!-- <pre>text:{{txt}}</pre> -->
                 <long-text v-if="txt.txt || txt.txt === ''" :value="txt.txt" class="note-text" :line="txt" :isList="note.isList" :style="getStyle(txt.active)" 
                  @update-text="(val)=>{$emit('text-change',note.id,txt.id,val)}" @click="toggleItem(txt.id)" /> 
                 <delete-btn v-if="(txt.txt || txt.txt === '') && note.isList" @delete="deleteLine(txt.id,'txt')" />
                 <!-- @delete="$emit('delete-note-item',note.id,txt.id,'txt')" -->
-                <button  class="btn" @click="txt.editing = !txt.editing">edit text</button>                
+                <button class="btn invert-btn" @click="txt.editing = !txt.editing" :style="background">edit text</button>                
             </li>
 
             <add-btn v-if="this.note.isList"  @add="addEmptyLine" />

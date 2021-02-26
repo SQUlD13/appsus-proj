@@ -71,18 +71,19 @@ function deleteContentItem(noteId, contentId, type) {
 }
 
 function toggleNoteList(note) {
+    const queryStr = '\n\n'
     if (note.isList) {
         var str = note.txt.map(text => {
             return text.txt
-        }).join('\n')
+        }).join(queryStr)
         note.txt = [{
             txt: str, id: note.txt[0].id, active: true, editing: false
         }]
     } else {
         var arr = []
         var str = note.txt[0].txt
-        while (str.indexOf('\n') > 0) {
-            var idx = str.indexOf('\n')
+        while (str.indexOf(queryStr) > 0) {
+            var idx = str.indexOf(queryStr)
             var start = str.slice(0, idx)
             str = str.slice(idx + 1)
             arr.push(start)

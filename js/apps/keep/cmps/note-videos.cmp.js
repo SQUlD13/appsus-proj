@@ -7,7 +7,7 @@ export default {
         <div class="note-videos">
                 <template v-if="videos">
                     <template v-for="(video,idx) in videos">
-                        <pre>{{video}}</pre>
+                        <!-- <pre>{{video}}</pre> -->
                         <iframe :src="video.url" width="500px" height="250px"></iframe>
                         <delete-btn  @delete="$emit('delete-vid',video.id)" />
                     </template>

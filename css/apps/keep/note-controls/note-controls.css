@@ -1,4 +1,5 @@
 .main-note-controls{
+    margin-block-start: 20px;
     display:flex;
     position:relative;
     bottom:10px;
