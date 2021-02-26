@@ -1,0 +1,52 @@
+.header {
+  padding: 10px 20px;
+}
+
+.header img {
+  width: 40px;
+}
+.header a:not(.text-a) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+}
+
+.buttons-container-1 {
+  margin-inline-end: 200px;
+}
+.buttons-container-2 {
+  margin-inline-start: 200px;
+}
+.buttons-container > *:not(:last-child) {
+  margin-inline-end: 15px;
+}
+
+.search-box {
+  width: 200px;
+}
+
+/* components: */
+
+/* search box: */
+
+.search-box {
+  border-radius: 8px;
+  font-size: 1.2rem;
+  background-color: #f1f3f4;
+}
+
+.search-box > form > * {
+  /* outline: 1px solid; */
+}
+
+.search-box input {
+  padding: 0.8rem 0.8rem;
+  font-size: 1.2rem;
+  background-color: unset;
+}
+.search-box button {
+  background-color: unset;
+  outline: unset;
+  border: unset;
+}

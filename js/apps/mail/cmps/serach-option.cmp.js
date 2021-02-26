@@ -9,8 +9,14 @@ export default {
                 <p class="from-to">{{fromTo}}</p>
             </div>
             <p class="timestamp">{{mail.general.timestamp}}</p>
+            <button @click="onButtonClick"></button>
         </router-link>
     `,
+  methods: {
+    onButtonClick() {
+      console.log('heyhey')
+    },
+  },
   computed: {
     fromTo() {
       return `${this.mail.addresses.from}, ${this.mail.addresses.to}`

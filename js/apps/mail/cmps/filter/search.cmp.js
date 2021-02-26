@@ -3,21 +3,22 @@ import searchOption from '../serach-option.cmp.js'
 export default {
   props: ['searchOptions'],
   template: `
-        <div class="search-box main-container flex column">
+        <div class="search-box flex-1 flex column">
           <form action="" @submit.prevent="emitChange" class="flex">
-            <img class="icon" src="" alt="">
-            <input type="text" class="search-input" list="lis" placeholder="search in mails" v-model="searchFilter.str" @focus="turnOnSearchFocus"
-          @blur="turnOffSearchFocus" >
-          <datalist id="lis">
-            <option v-for="mail in searchOptions" value="nisim" @click="onOptionClick">
-              <search-option :mail="mail" @click="onOptionClick"/>
-            </option>
-          </datalist>
-            <button>search</button>
+            <a href="" class="options">
+              <img class="icon center" src="" alt="O">
+            </a>
+
+            <input type="text" class="search-input flex-1" placeholder="search in curr-app" v-model="searchFilter.str" @focus="turnOnSearchFocus"
+             @blur="turnOffSearchFocus">
+
+            <a class="search-button" href="">
+              <a class="text-a">S</a>
+            </a>
           </form>
-          <!-- <div class="search-options">
+          <div class="search-options">
           <search-option v-if="isShowOptions" v-for="mail in searchOptions" :mail="mail"/>
-          </div> -->
+          </div>
         </div>
     `,
   data() {
@@ -27,6 +28,7 @@ export default {
       },
       filterTimeout: null,
       searchFocus: false,
+      blurTimeout: null,
     }
   },
   methods: {
@@ -43,7 +45,8 @@ export default {
     },
     turnOffSearchFocus() {
       console.log('input blured')
-      this.searchFocus = false
+      clearTimeout(this.blurTimeout)
+      this.blurTimeout = setTimeout(() => (this.searchFocus = false), 500)
     },
     onOptionClick() {
       console.log('on option click')
