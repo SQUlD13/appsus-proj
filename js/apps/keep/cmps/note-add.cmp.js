@@ -5,13 +5,16 @@ import addBtn from '../../../cmps/add-btn.cmp.js'
 import note from './note.cmp.js'
 
 export default {
+    props: ['note'],
     template: `
     <section class="note-add">
+        <!-- <pre>{{this.note}}</pre> -->
         <add-btn @add="this.toggleActive" ></add-btn>
         <transition name="slide-down">
         <div v-if="isActive" class="new-note">
-            <note :notedata="this.note" @delete-note="toggleActive()" @change-txt="updateContent"/>
-            <button class="btn add-btn" @click="addNote">Add Note</button>
+            <note :note="this.note" @delete-note="toggleActive()" @change-txt="updateContent" @add-img="(url)=>$emit('add-img',note.id,url)"/>
+            
+            <button class="btn add-btn" @click="addNote" @>Add Note</button>
         </div>
         </transition>
     </section>
@@ -19,15 +22,7 @@ export default {
     data() {
         return {
             isActive: false,
-            plusColor: '#fff',
-            content: '',
-            type: '',
-            color: utilService.createRandomColor(),
-            id: utilService.makeId()
         }
-    },
-    created() {
-
     },
     methods: {
         addNote() {
@@ -40,17 +35,6 @@ export default {
             console.log('closing new note')
             this.content = ''
             this.isActive = !this.isActive;
-        }
-    },
-    computed: {
-        note() {
-            var note = {
-                txt: this.content,
-                type: this.type,
-                color: this.color,
-                id: this.id
-            }
-            return keepService.createNote(note)
         }
     },
     components: { note, addBtn }

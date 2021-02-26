@@ -3,3 +3,6 @@
     position:relative;
     bottom:10px;
 }
+.main-note-controls .list-toggle-btn,.img-add-btn{
+    transition: none;
+}

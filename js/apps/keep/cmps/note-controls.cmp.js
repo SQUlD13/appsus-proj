@@ -15,10 +15,23 @@ export default {
             <button class="btn invert-btn list-toggle-btn" @click="$emit('toggle-list')" :style="background">
                 <p class="fas invert-btn list-icon" v-html="this.listContent" :style="color">{{listContent}}</p>
             </button>
-            <delete-btn @delete="$emit('delete-note')" :info="this.info" :key="info.color"/>
+            <button class="btn invert-btn img-add-btn" :style="background" @click="toggleSearch('img')">
+                <p class="fas invert-btn" :style="color">'&#xf302;</p>
+            </button>
+            <delete-btn @delete="$emit('delete-note')" :info="{color: this.invertedColor}" :key="note.id" />
         </div>
+        <form v-if="search" @submit="$emit('add-'+search, searchVal)">
+            <input v-model="searchVal" type="text" >
+            <button type="submit"> submit </button>
+        </form>
     </div>
     `,
+    data() {
+        return {
+            search: null,
+            searchVal: ''
+        }
+    },
     computed: {
         listContent() {
             return (this.note.isList) ? '\&#xf0ca;' : '\&#xf550'
@@ -37,6 +50,12 @@ export default {
                 size: 16,
                 color: this.invertedColor
             }
+        }
+    },
+    methods: {
+        toggleSearch(val) {
+            if (this.search === val) this.search = null
+            else this.search = val
         }
     },
     components: { deleteBtn }

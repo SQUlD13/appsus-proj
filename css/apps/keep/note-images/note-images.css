@@ -1,0 +1,12 @@
+.note-images{
+    display: flex;
+    flex-flow: wrap;
+}
+.note-img-wrapper{
+    position: relative;
+}
+.note-img{
+    display: flex;
+    flex-grow:1;
+    width:100%;
+}
