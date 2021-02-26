@@ -1,12 +1,5 @@
 @import url('../note-controls/note-controls.css');
-@font-face {
-    font-family:'fa';
-    src: url('../../../fonts/font-awesome/fa-regular-400.woff2') format ('woff2');
-}
-@font-face{
-    font-family:'fas';
-    src: url('../../../fonts/font-awesome/fa-solid-900.woff2') format('woff2');
-}
+
 .keep-app{
     height:100%;
     width:100%;
@@ -37,6 +30,7 @@
 .note-text p{
     width:100%;
     cursor: pointer;
+    overflow-wrap: break-word;
 }
 
 .note-text{
@@ -64,7 +58,6 @@
     margin:0;
     padding:0;
     max-height: 500px;
-    overflow-y: auto;
 }
 .note-content-list .note-text{
     border:3px var(--s) solid;
@@ -119,14 +112,6 @@
     opacity: 0;
 }
 
-.fa{
-    font-size: 32px;
-    font-family: 'fa';
-}
-.fas{
-    font-size: 32px;
-    font-family: 'fas';
-}
 
 /* .add-btn{
     background:var(--m);

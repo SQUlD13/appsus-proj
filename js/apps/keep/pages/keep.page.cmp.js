@@ -7,14 +7,17 @@ import noteAdd from '../cmps/note-add.cmp.js'
 export default {
     template: `
     <section class="keep-app main-container">
-        <h1>keepApp</h1>        
+        <h1>keepApp</h1>       
+        <!-- <pre>{{notes}}</pre>  -->
         <noteAdd @add-note="addNote" :note="newNote" @add-img="addImage"/>
         <ul v-if="notes" class="clean-list note-list">
             <!-- <transition-group name="list-column"> -->
                 <li v-for="note in notes" :key="note.id">
+                <!-- <pre>{{note}}</pre> -->
                     <note  v-if="note.id !== 'note-add'" :note="note" @delete-note="deleteNote" @add-note="addNote" @update-notes="updateNotes" 
-                    @delete-note-item="deleteContentItem" @toggle-list="toggleList" @add-empty-line="addEmptyContentItem" @toggle-item="toggleItem" 
-                    @text-change="updateText" @background-change="updateBackground" @add-img="addImage"/>
+                    @toggle-item="toggleItem" @text-change="updateText" @background-change="updateBackground"
+                    @add-vid="addVideo" @add-img="addImage"/>
+                    <!-- @add-empty-line="addEmptyContentItem" @delete-note-item="deleteContentItem"-->
                 </li>
             <!-- </transition-group> -->
         </ul>
@@ -29,13 +32,14 @@ export default {
     created() {
         keepService.query()
             .then(notes => {
-                if (!notes || notes.length <= 1) {
+                if (!notes || notes.length < 1) {
                     keepService.createNotes()
-                        .then(notes => {
-                            notes.push(newNote)
-                            console.log("🚀 ~ file: keep.page.cmp.js ~ line 37 ~ created ~ notes", notes)
-                            this.notes = notes
-                            //keepService.addNote(newNote)
+                        .then(() => {
+                            keepService.query()
+                                .then((notes) => {
+                                    notes.push(newNote)
+                                    this.notes = notes
+                                })
                         })
                 } else this.notes = notes
             })
@@ -52,6 +56,7 @@ export default {
             keepService.query()
                 .then(notes => {
                     this.notes = notes
+                    console.log('updating notes')
                 })
         },
         addNote(note) {
@@ -61,25 +66,27 @@ export default {
                     this.updateNotes()
                 })
         },
-        deleteContentItem(noteId, itemId, type) {
-            keepService.deleteContentItem(noteId, itemId, type)
-                .then(() => { this.updateNotes() })
-                .catch(console.log())
-        },
-        addEmptyContentItem(noteId) {
-            keepService.addEmptyText(noteId)
-                .then(() => { this.updateNotes() })
-        },
-        toggleList(noteId) {
-            keepService.getNote(noteId)
-                .then(note => {
-                    keepService.toggleNoteList(note)
-
-                    note.isList = !note.isList
-                    keepService.updateNote(note)
-                        .then(() => { this.updateNotes() })
-                })
-        },
+        // deleteContentItem(noteId, itemId, type) {
+        //     keepService.deleteContentItem(noteId, itemId, type)
+        //         .then(() => { this.updateNotes() })
+        //         .catch(console.log())
+        // },
+        // addEmptyContentItem(noteId) {
+        //     keepService.addEmptyText(noteId)
+        //         .then(() => { this.updateNotes(); this.$forceUpdate() })
+        // },
+        // toggleList(noteId) {
+        //     keepService.getNote(noteId)
+        //         .then(note => {
+        //             keepService.toggleNoteList(note)
+        //                 .then(note => {
+        //                     //note.isList = !note.isList
+        //                     console.log("🚀 ~ file: keep.page.cmp.js ~ line 87 ~ toggleList ~ note", note)
+        //                     //keepService.updateNote(note)
+        //                     //    .then(() => { this.updateNotes() })
+        //                 })
+        //         })
+        //},
         toggleItem(noteId, itemId) {
             keepService.getNote(noteId)
                 .then(note => {
@@ -118,6 +125,20 @@ export default {
                 .then(note => {
                     console.log("🚀 ~ file: keep.page.cmp.js ~ line 113 ~ addImage ~ note", note)
                     note.img.push({ url, id: utilService.makeId() })
+                    keepService.updateNote(note)
+                        .then(() => { this.updateNotes() })
+                })
+        },
+        addVideo(noteId, url) {
+            console.log('adding video to note', noteId, '.\n video url is ', url)
+            keepService.getNote(noteId)
+                .then(note => {
+                    var queryStr = '/watch?v='
+                    var idx = url.indexOf('/watch?v=')
+                    if (idx < 0) Promise.reject('Not a valid youtube url')
+                    var id = url.slice(idx + queryStr.length)
+                    var queryUrl = `https://www.youtube.com/embed/${id}`
+                    note.vid.push({ url: queryUrl, id: utilService.makeId() })
                     keepService.updateNote(note)
                         .then(() => { this.updateNotes() })
                 })

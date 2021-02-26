@@ -1,3 +1,15 @@
+@font-face {
+    font-family:'fa';
+    src: url('./fonts/font-awesome/fa-regular-400.woff2');
+}
+@font-face{
+    font-family:'fas';
+    src: url('./fonts/font-awesome/fa-solid-900.woff2');
+}
+@font-face{
+  font-family: 'fab';
+  src: url('./fonts/font-awesome/fa-brands-400.woff2');
+}
 :root{
     --white:#F2FCF0;
     --black:#002D43;
@@ -68,6 +80,20 @@ a:active{
 }
 .btn:focus{
     border:3px rgba(255, 250, 250, 0.75) solid;
+}
+
+
+.fa{
+    font-size: 32px;
+    font-family: 'fa';
+}
+.fas{
+    font-size: 32px;
+    font-family: 'fas';
+}
+.fab{
+  font-size:32px;
+  font-family:'fab'
 }
 
 ::-webkit-scrollbar {

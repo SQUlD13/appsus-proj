@@ -16,7 +16,6 @@ export default {
     data() {
         return {
             fullState: this.line.active,
-            txt: this.value,
         }
     },
     computed: {
@@ -37,6 +36,9 @@ export default {
             var str = 'long-text'
             if (this.line.editing) str += 'editing'
             return str
+        },
+        txt() {
+            return this.value
         }
     },
     methods: {
@@ -52,5 +54,5 @@ export default {
             var src = evt.target.innerText
             this.$emit('text-change', src)
         },
-    },
+    }
 }
