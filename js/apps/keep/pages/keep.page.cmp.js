@@ -9,15 +9,17 @@ export default {
     <section class="keep-app main-container">
         <h1>keepApp</h1>       
         <!-- <pre>{{notes}}</pre>  -->
-        <noteAdd @add-note="addNote" :note="newNote" @add-img="addImage"/>
+        <noteAdd @add-empty-note="addEmptyNote" @add-note="addNote" :note="newNote" @add-img="addImage"/>
         <ul v-if="notes" class="clean-list note-list">
             <!-- <transition-group name="list-column"> -->
-                <li v-for="note in notes" :key="note.id">
+                <li class="note-list-item" v-for="note in notes" :key="note.id">
                 <!-- <pre>{{note}}</pre> -->
-                    <note  v-if="note.id !== 'note-add'" :note="note" @delete-note="deleteNote" @add-note="addNote" @update-notes="updateNotes" 
+                    <note  
+                    v-if="note.id !== 'note-add'" :note="note" @delete-note="deleteNote" @add-note="addNote" @update-notes="updateNotes" 
                     @toggle-item="toggleItem" @text-change="updateText" @background-change="updateBackground"
-                    @add-vid="addVideo" @add-img="addImage"/>
-                    <!-- @add-empty-line="addEmptyContentItem" @delete-note-item="deleteContentItem"-->
+                    @add-vid="addVideo" @add-img="addImage" @add-empty-line="addEmptyLine" @delete-line="deleteLine" 
+                    @toggle-list="toggleList" @pin-note="pinNote"/>
+                    <!-- @add-empty-line="addEmptyContentItem" @delete-note-item="deleteContentItem" -->
                 </li>
             <!-- </transition-group> -->
         </ul>
@@ -39,7 +41,7 @@ export default {
                                 .then((notes) => {
                                     notes.push(newNote)
                                     this.notes = notes
-                                    console.log(this.$route.query, 'query params on start')
+                                    console.log(this.$route, 'query params on start')
                                 })
                         })
                 } else this.notes = notes
@@ -63,31 +65,38 @@ export default {
         addNote(note) {
             console.log('adding note', note)
             keepService.addNote(note)
+                .then(this.updateNotes)
+        },
+        addEmptyNote() {
+            console.log('adding Empty Note')
+            var note = keepService.createNote({
+                txt: [' ']
+            })
+            keepService.addNote(note)
+                .then(this.updateNotes)
+        },
+        addEmptyLine(noteId) {
+            keepService.addEmptyText(noteId)
+                .then((note) => {
+                    this.updateNotes()
+                })
+        },
+        deleteLine(noteId, lineId, type) {
+            keepService.deleteContentItem(noteId, lineId, type)
                 .then(() => {
                     this.updateNotes()
                 })
         },
-        // deleteContentItem(noteId, itemId, type) {
-        //     keepService.deleteContentItem(noteId, itemId, type)
-        //         .then(() => { this.updateNotes() })
-        //         .catch(console.log())
-        // },
-        // addEmptyContentItem(noteId) {
-        //     keepService.addEmptyText(noteId)
-        //         .then(() => { this.updateNotes(); this.$forceUpdate() })
-        // },
-        // toggleList(noteId) {
-        //     keepService.getNote(noteId)
-        //         .then(note => {
-        //             keepService.toggleNoteList(note)
-        //                 .then(note => {
-        //                     //note.isList = !note.isList
-        //                     console.log("🚀 ~ file: keep.page.cmp.js ~ line 87 ~ toggleList ~ note", note)
-        //                     //keepService.updateNote(note)
-        //                     //    .then(() => { this.updateNotes() })
-        //                 })
-        //         })
-        //},
+        toggleList(noteId) {
+            keepService.getNote(noteId)
+                .then(note => {
+                    keepService.toggleNoteList(note)
+                        .then(note => {
+                            console.log("🚀 ~ file: keep.page.cmp.js ~ line 87 ~ toggleList ~ note", note)
+                            this.updateNotes()
+                        })
+                })
+        },
         toggleItem(noteId, itemId) {
             keepService.getNote(noteId)
                 .then(note => {
@@ -142,8 +151,12 @@ export default {
                     keepService.updateNote(note)
                         .then(() => { this.updateNotes() })
                 })
+        },
+        pinNote(noteId) {
+            console.log('calling pin note')
+            keepService.toggleNotePin(noteId)
+                .then(this.updateNotes)
         }
-
     },
     watch: {
         '$route.query'(to) {

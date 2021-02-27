@@ -1,3 +1,8 @@
 @import url('note/note.css');
 @import url('note-add/note-add.css');
-@import url('note-images/note-images.css')
+@import url('note-images/note-images.css');
+
+.note-list-item{
+    width:500px;
+    height:fit-content;
+}

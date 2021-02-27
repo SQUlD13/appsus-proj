@@ -4,6 +4,13 @@
     position:relative;
     bottom:10px;
 }
-.main-note-controls .list-toggle-btn,.img-add-btn{
+.note-cntrl-btn{
     transition: none;
+    background: transparent;
+}
+.note-cntrl-btn:hover{
+    background: transparent;
+}
+note-cntrl-btn > *{
+    font-size: 16px;
 }

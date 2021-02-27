@@ -1,4 +1,6 @@
+/* General Components */
 @import url('base.css');
+@import url('cmps/nav-btn.css');
 @import url('cmps/delete-btn.css');
 
 /* Header: */
@@ -7,7 +9,7 @@
 
 /* Notificaion */
 @import url('cmps/notification.css');
-
+/* Keep App */
 @import url('apps/keep/main.css');
 
 /* mail imports: */
@@ -19,4 +21,8 @@
 .main-container {
   max-width: 1080px;
   margin: 0 auto;
+}
+
+.home-page{
+
 }

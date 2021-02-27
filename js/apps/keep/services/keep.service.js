@@ -17,7 +17,6 @@ function query() {
     return storageService.query(KEEP_KEY)
         .then((notes) => {
             var filtered = _Filter(notes)
-            console.log("🚀 ~ file: keep.service.js ~ line 20 ~ .then ~ filtered", filtered)
             _sortPinned(filtered)
             return Promise.resolve(filtered)
         })
@@ -43,7 +42,6 @@ function _Filter(notes) {
     })
 }
 function setFilter(val) {
-    console.log("🚀 ~ file: keep.service.js ~ line 46 ~ setFilter ~ val", val)
     gFilter = val
     return Promise.resolve(gFilter)
 }
@@ -99,7 +97,6 @@ function toggleNoteList(note) {
     } else {
         var arr = []
         var str = note.txt[0].txt
-        console.log("🚀 ~ file: keep.service.js ~ line 85 ~ toggleNoteList ~ note.txt", note.txt)
         while (str.indexOf(queryStr) > 0) {
             var idx = str.indexOf(queryStr)
             var start = str.slice(0, idx)
@@ -119,15 +116,17 @@ function toggleNoteList(note) {
     }
     note.isList = !note.isList
     console.log('keep Service toggle note list - note - line 92', note)
-    return Promise.resolve(note)
+    return updateNote(note)
+        .then(() => { return Promise.resolve(note) })
 }
 
 function toggleNotePin(id) {
     return getNote(id)
         .then(note => {
+            console.log("🚀 ~ file: keep.service.js ~ line 126 ~ toggleNotePin ~ note", note)
             note.pinned = !note.pinned
-            updateNote(note)
-            return Promise.resolve(note)
+            return updateNote(note)
+                .then((note) => { Promise.resolve(note) })
         })
 }
 
