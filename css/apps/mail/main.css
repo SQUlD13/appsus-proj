@@ -14,6 +14,6 @@
 .mail-app .circle-a {
   border-radius: 50%;
 }
-.mail-app a:hover {
+.mail-app a:hover:not(.avoid-default-a) {
   background-color: rgba(60, 64, 67, 0.08);
 }

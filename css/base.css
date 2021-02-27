@@ -310,6 +310,9 @@ iframe {
 .align-center {
   align-items: center;
 }
+.align-end {
+  align-items: flex-end;
+}
 .space-between {
   justify-content: space-between;
 }

@@ -6,9 +6,6 @@ export default {
   template: `
         <div class="search-box flex-1 flex column">
           <form  @submit.prevent="routSearch" class="flex">
-            <a href="" class="options">
-              <img class="icon center" src="" alt="O">
-            </a>
 
             <div class="input-box flex-1 flex">
               <input type="text" class="search-input flex-1" placeholder="search in Appsus" v-model="strSearchFilter" @focus="turnOnSearchFocus"

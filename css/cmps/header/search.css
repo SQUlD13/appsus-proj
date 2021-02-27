@@ -7,6 +7,10 @@
   position: relative;
 }
 
+.search-box * {
+  color: black !important;
+}
+
 .search-box > form > * {
   /* outline: 1px solid; */
 }
