@@ -22,7 +22,11 @@
   max-width: 1080px;
   margin: 0 auto;
 }
-
 .home-page{
-
+  height:90vh;
+  width:100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
 }

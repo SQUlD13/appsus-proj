@@ -36,7 +36,6 @@ function _Filter(notes) {
         var txtArr = note.txt.map((txt) => txt.txt.toLowerCase())
 
         if (txtArr[0].includes(gFilter.toLowerCase())) {
-            console.log(gFilter)
             return note
         }
     })
@@ -73,7 +72,6 @@ function deleteContentItem(noteId, contentId, type) {
     return storageService.get(KEEP_KEY, noteId)
         .then(note => {
             if ((note[type].length > 1 && type === 'txt') || type !== 'txt') {
-                console.log('deleting content line')
                 var contentIdx = note[type].findIndex(content => content.id === contentId)
                 note[type].splice(contentIdx, 1)
                 this.note = note
@@ -115,7 +113,6 @@ function toggleNoteList(note) {
         note.txt = txt
     }
     note.isList = !note.isList
-    console.log('keep Service toggle note list - note - line 92', note)
     return updateNote(note)
         .then(() => { return Promise.resolve(note) })
 }
@@ -123,7 +120,6 @@ function toggleNoteList(note) {
 function toggleNotePin(id) {
     return getNote(id)
         .then(note => {
-            console.log("🚀 ~ file: keep.service.js ~ line 126 ~ toggleNotePin ~ note", note)
             note.pinned = !note.pinned
             return updateNote(note)
                 .then((note) => { Promise.resolve(note) })
@@ -208,15 +204,12 @@ function _mapImg(imgArr) {
 function _mapVid(vidArr) {
     var vidMap = []
     if (vidArr.length) {
-        console.log('making map for vidArr', vidArr)
         vidMap = vidArr.map((item) => {
             return {
                 id: utilService.makeId(),
                 url: item,
             }
         })
-        console.log("🚀 ~ file: keep.service.js ~ line 201 ~ vidMap=vidMap.map ~ vidMap", vidMap)
-
     }
     return vidMap
 }

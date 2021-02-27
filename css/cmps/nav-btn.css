@@ -14,12 +14,23 @@
 .nab-link:active{
     color:var(--d);
 }
+.nav-link-inactive{
+    cursor: default;
+    color:var(--black);
+}
+.nav-link-inactive:hover{
+    color:var(--black);
+}
+.nab-link-inactive:active{
+    color:var(--black);
+}
 .nav-btn{
     width:48px;
     height:48px;
 }
 .nav-link-wrapper{
     position: absolute;
+    display:flex;
     border-radius: 5px;
     box-shadow: 3px 3px 7px 3px rgba(34, 34, 34, 0.5);
 

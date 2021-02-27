@@ -15,27 +15,25 @@ export default {
         <!-- <pre>{{note}}</pre> -->
         <ul :class="contentClass">
             <note-images :note="note" 
-            @delete-img="(lineId)=>{deleteLine(lineId,'img')}" />
-             <!-- @delete-img="(lineId)=>$emit('delete-note-item',note.id,lineId,'img')" -->
+            @delete-img="(lineId)=>{$emit('delete-line',note.id,lineId,'img')}" />
 
             <note-videos :videos="note.vid" 
-            @delete-vid="(vidId)=>{deleteLine(vidId,'vid')}" />
+            @delete-vid="(vidId)=>{$emit('delete-line',note.id,vidId,'vid')}" />
                 
-
             <li class="note-item" v-for="txt in note.txt" :key="txt.id">
                 <!-- <pre>text:{{txt}}</pre> -->
                 <long-text v-if="txt.txt || txt.txt === ''" :value="txt.txt" class="note-text" :line="txt" :isList="note.isList" :style="getStyle(txt.active)" 
                  @update-text="(val)=>{$emit('text-change',note.id,txt.id,val); txt.txt = val}" @click="toggleItem(txt.id)" /> 
-                <delete-btn v-if="(txt.txt || txt.txt === '') && note.isList" @delete="$emit('delete-line',note.id,txt.id,'txt')" />
-                <!-- @delete="$emit('delete-note-item',note.id,txt.id,'txt')" -->
-                <button class="btn invert-btn fas note-cntrl-btn" @click="txt.editing = !txt.editing" :style="'color:'+note.color+';'">&#xf044;</button>                
+                 <div class="line-controls flex jcc aic">
+                    <delete-btn v-if="(txt.txt || txt.txt === '') && note.isList" @delete="$emit('delete-line',note.id,txt.id,'txt')" />
+                    <button class="btn invert-btn fas note-cntrl-btn" @click="txt.editing = !txt.editing" :style="'color:'+note.color+';'">&#xf044;</button>                
+                 </div>
             </li>
 
             <add-btn class="note-cntrl-btn invert-btn"v-if="this.note.isList"  @add="$emit('add-empty-line',note.id)" :info="{color:note.color}"/>
-            <!-- @add="$emit('add-empty-line',note.id)" -->
         </ul>
 
-        <note-controls :note="note" @toggle-list="$emit('toggle-list',note.id)" @background-change="$emit('background-change',note.id,note.color)" 
+        <note-controls class="flex jcc auc" :note="note" @toggle-list="$emit('toggle-list',note.id)" @background-change="$emit('background-change',note.id,note.color)" 
         @delete-note="$emit('delete-note',note.id)" @background-save="saveNote" @add-img="(url)=>$emit('add-img',note.id,url)"
         @add-vid="(url)=>$emit('add-vid',note.id,url)" @pin-note="$emit('pin-note',note.id)"></note-controls>
 </div>
