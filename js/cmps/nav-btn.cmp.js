@@ -17,8 +17,13 @@ export default {
             active: false
         }
     },
+    computed: {
+        path() {
+            return this.$route.path
+        }
+    },
     watch: {
-        'this.$route.path'() {
+        'this.path'() {
             this.active = false;
         }
     }
