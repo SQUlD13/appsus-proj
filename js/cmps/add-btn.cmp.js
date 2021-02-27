@@ -13,17 +13,18 @@ export default {
         return {
             size: null,
             strokeWidth: null,
-            color: null
         }
     },
     created() {
         this.size = (this.info && this.info.size) ? this.info.size : 10
         this.strokeWidth = (this.info && this.info.strokeWidth) ? this.info.strokeWidth : 3
-        this.color = (this.info && this.info.color) ? this.info.color : '#fff'
     },
     computed: {
         half() {
             return this.size / 2
+        },
+        color() {
+            return (this.info && this.info.color) ? this.info.color : '#fff'
         }
     },
     methods: {

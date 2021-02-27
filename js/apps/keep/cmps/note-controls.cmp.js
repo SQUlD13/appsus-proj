@@ -7,24 +7,24 @@ export default {
     <div class="note-controls">
     <!-- <pre>{{note}}</pre> -->
         <div class="main-note-controls">
-            <button class="btn center invert-btn" >
-                <div class="note-color-input-wrapper" :style="background">
+            <button class="btn center invert-btn note-cntrl-btn" >
+                <div class="note-color-input-wrapper">
                     <input type="color" id="note-color" v-model="note.color" @input="$emit('background-change',note)" @change="$emit('background-save',note)"/>
                 </div>
                 <p class="fas palette-icon" :style="color">&#xf53f;</p>
             </button>
-            <button class="btn invert-btn list-toggle-btn" @click="$emit('toggle-list')" :style="background">
+            <button class="btn invert-btn note-cntrl-btn list-toggle-btn" @click="$emit('toggle-list')">
                 <p class="fas invert-btn list-icon" v-html="this.listContent" :style="color">{{listContent}}</p>
             </button>
-            <button class="btn invert-btn img-add-btn" :style="background" @click="toggleSearch('img')">
+            <button class="btn invert-btn note-cntrl-btn img-add-btn" @click="toggleSearch('img')">
                 <p class="fas invert-btn" :style="color">&#xf302;</p>
             </button>
-            <button class="btn invert-btn vid-add-btn" :style="background" @click="toggleSearch('vid')">
+            <button class="btn invert-btn note-cntrl-btn vid-add-btn" @click="toggleSearch('vid')">
                 <p class="fab invert-btn" :style="color">&#xf167;</p>
             </button>
-            <delete-btn @delete="$emit('delete-note')" :info="{color: this.invertedColor}" :key="note.id" />
-            <button class="btn pin-note-btn" :style="this.pinStyle" >
-                <p class="invert-btn fas" :style="color" @click="$emit('pin-note')">&#xf08d;</p>
+            <delete-btn class="note-cntrl-btn" @delete="$emit('delete-note')" :info="{color: this.invertedColor}" :key="note.id" />
+            <button class="btn pin-note-btn note-cntrl-btn invert-btn"  >
+                <p class="invert-btn fas" :style="this.pinStyle" @click="$emit('pin-note')">&#xf08d;</p>
             </button>
         </div>
 
@@ -49,7 +49,7 @@ export default {
             return `background:${this.note.color};`
         },
         color() {
-            return `color:${this.note.color};`
+            return `color:${this.invertedColor};`
         },
         invertedColor() {
             return utilService.invertColor(this.note.color)
@@ -61,7 +61,7 @@ export default {
             }
         },
         pinStyle() {
-            return (this.note.pinned) ? 'background:red;' : 'this.background'
+            return (this.note.pinned) ? 'color:red;' : this.color
         }
     },
     methods: {

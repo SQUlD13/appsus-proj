@@ -26,18 +26,18 @@ export default {
                 <!-- <pre>text:{{txt}}</pre> -->
                 <long-text v-if="txt.txt || txt.txt === ''" :value="txt.txt" class="note-text" :line="txt" :isList="note.isList" :style="getStyle(txt.active)" 
                  @update-text="(val)=>{$emit('text-change',note.id,txt.id,val); txt.txt = val}" @click="toggleItem(txt.id)" /> 
-                <delete-btn v-if="(txt.txt || txt.txt === '') && note.isList" @delete="deleteLine(txt.id,'txt')" />
+                <delete-btn v-if="(txt.txt || txt.txt === '') && note.isList" @delete="$emit('delete-line',note.id,txt.id,'txt')" />
                 <!-- @delete="$emit('delete-note-item',note.id,txt.id,'txt')" -->
-                <button class="btn invert-btn fas" @click="txt.editing = !txt.editing" :style="'color:'+note.color+';'">&#xf044;</button>                
+                <button class="btn invert-btn fas note-cntrl-btn" @click="txt.editing = !txt.editing" :style="'color:'+note.color+';'">&#xf044;</button>                
             </li>
 
-            <add-btn v-if="this.note.isList"  @add="addEmptyLine" />
+            <add-btn class="note-cntrl-btn invert-btn"v-if="this.note.isList"  @add="$emit('add-empty-line',note.id)" :info="{color:note.color}"/>
             <!-- @add="$emit('add-empty-line',note.id)" -->
         </ul>
 
-        <note-controls :note="note" @toggle-list="toggleList" @background-change="$emit('background-change',note.id,note.color)" 
+        <note-controls :note="note" @toggle-list="$emit('toggle-list',note.id)" @background-change="$emit('background-change',note.id,note.color)" 
         @delete-note="$emit('delete-note',note.id)" @background-save="saveNote" @add-img="(url)=>$emit('add-img',note.id,url)"
-        @add-vid="(url)=>$emit('add-vid',note.id,url)"    @pin-note="pinNote"></note-controls>
+        @add-vid="(url)=>$emit('add-vid',note.id,url)" @pin-note="$emit('pin-note',note.id)"></note-controls>
 </div>
     `,
     data() {
@@ -66,11 +66,11 @@ export default {
         }
     },
     methods: {
-        updateBackground({ color }) {
-            //this.color = color
-        },
         getStyle(activeBool) {
-            return (activeBool) ? '' : 'text-decoration: line-through;'
+            var color = utilService.invertColor(this.note.color)
+            var base = `color:${color};`
+            var activeStr = (activeBool) ? '' : 'text-decoration: line-through;'
+            return base + activeStr
         },
         saveNote() {
             keepService.getNote(this.note.id)
@@ -81,56 +81,7 @@ export default {
         toggleItem(contentId) {
             if (this.note.isList) this.$emit('toggle-item', this.note.id, contentId)
         },
-        toggleList() {
-            keepService.getNote(this.note.id)
-                .then((note) => {
-                    keepService.toggleNoteList(note)
-                        .then((note => {
-                            //note.isList = !note.isList
-                            this.note.isList = note.isList
-                            this.note.txt = note.txt;
-                            console.log("🚀 ~ file: note.cmp.js ~ line 86 ~ .then ~ note.txt;", note)
-                            keepService.updateNote(note)
-                                //.then(() => { this.$emit('toggle-list', this.note.id) })
-                                .then(() => {
-                                    //this.$emit('update-notes')
-                                    //this.$forceUpdate()
-                                })
-                        }))
-                    // this.updateNotes()
 
-                })
-        },
-        addEmptyLine() {
-            keepService.addEmptyText(this.note.id)
-                .then((note) => {
-                    this.note.txt = note.txt
-                })
-        },
-        deleteLine(lineId, type) {
-            keepService.deleteContentItem(this.note.id, lineId, type)
-                .then((note) => {
-                    this.note.txt = note.txt
-                    this.note.img = note.img
-                    this.note.vid = note.vid
-                })
-        },
-        pinNote() {
-            console.log('calling pin note')
-            // keepService.getNote(this.note.id)
-            //     .then((note) => {
-            //         console.log("🚀 ~ file: note.cmp.js ~ line 116 ~ .then ~ note", note)
-            //         note.pinned = !note.pinned
-            //         this.note.pinned = note.pinned
-            //         //keepService.updateNote(note)
-            //     })
-            keepService.toggleNotePin(this.note.id)
-                .then((note) => {
-                    console.log("🚀 ~ file: note.cmp.js ~ line 123 ~ .then ~ note", note)
-                    this.note.pinned = note.pinned
-                    this.$emit('update-notes')
-                })
-        }
     },
 
     components: { addBtn, deleteBtn, longText, noteControls, noteImages, noteVideos }

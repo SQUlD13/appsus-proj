@@ -5,16 +5,18 @@ import addBtn from '../../../cmps/add-btn.cmp.js'
 import note from './note.cmp.js'
 
 export default {
-    props: ['note'],
     template: `
     <section class="note-add">
         <!-- <pre>{{this.note}}</pre> -->
-        <add-btn @add="this.toggleActive" ></add-btn>
+        <add-btn  @add="$emit('add-empty-note')" :info="{color:'var(--white)'}"/>
+         <!-- @add="$emit('add-empty-note')" -->
         <transition name="slide-down">
         <div v-if="isActive" class="new-note">
-            <note :note="this.note" @delete-note="toggleActive()" @change-txt="updateContent" @add-img="(url)=>$emit('add-img',note.id,url)"/>
+
+            <note :note="this.note" @delete-note="toggleActive()" @change-txt="updateContent" @add-img="(url)=>$emit('add-img',note.id,url)"
+                />
             
-            <button class="btn add-btn" @click="addNote" @>Add Note</button>
+            <button class="btn add-btn" @click="addNote">Add Note</button>
         </div>
         </transition>
     </section>
@@ -22,6 +24,16 @@ export default {
     data() {
         return {
             isActive: false,
+            isList: false,
+            color: utilService.createRandomColor(),
+            img: [],
+            vid: [],
+            txt: [' ']
+        }
+    },
+    computed: {
+        note() {
+            return keepService.createNote({ isActive: this.isActive, isList: this.isList, color: this.color, img: this.img, vid: this.vid, txt: this.txt })
         }
     },
     methods: {
