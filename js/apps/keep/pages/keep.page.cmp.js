@@ -3,6 +3,7 @@ import { keepService } from '../services/keep.service.js'
 import longText from '../../../cmps/long-text.cmp.js'
 import note from '../cmps/note.cmp.js'
 import noteAdd from '../cmps/note-add.cmp.js'
+import { eventBus } from '../../../services/event-bus.service.js'
 
 export default {
     template: `
@@ -83,8 +84,12 @@ export default {
         },
         deleteLine(noteId, lineId, type) {
             keepService.deleteContentItem(noteId, lineId, type)
-                .then(() => {
+                .then((ans) => {
+                    console.log("🚀 ~ file: keep.page.cmp.js ~ line 88 ~ .then ~ ans", ans)
                     this.updateNotes()
+                })
+                .catch((err) => {
+                    eventBus.$emit('notify', { str: err, status: 'error' })
                 })
         },
         toggleList(noteId) {

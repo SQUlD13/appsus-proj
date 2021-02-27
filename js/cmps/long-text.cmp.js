@@ -8,14 +8,14 @@ export default {
             length>100 : {{this.txt.length>100}}
             </pre> -->
     
-        <p :contentEditable="this.line.editing" class="long-text" @click="toggleFull" :value="this.txt" v-html="this.description" @input="onEdit" 
+        <p :contentEditable="this.line && this.line.editing" class="long-text" @click="toggleFull" :value="this.txt" v-html="this.description" @input="onEdit" 
         @blur="$emit('update-text',$event.target.innerText)" :style="calcStyle">
         </p>
     </div>
     `,
     data() {
         return {
-            fullState: this.line.active,
+            fullState: (this.line) ? this.line.active : false,
         }
     },
     computed: {
@@ -24,17 +24,17 @@ export default {
                 this.txt.substr(0, 99) + '...' : this.txt.substr(0, 99)
         },
         calcStyle() {
-            var str = (!this.line.editing && !this.line.active) ? 'text-decoration:line-through;' : ''
-            if (this.line.editing) str += 'background:#fff;'
+            var str = (this.line && (!this.line.editing && !this.line.active)) ? 'text-decoration:line-through;' : ''
+            if (this.line && this.line.editing) str += 'background:#fff;'
             return str
         },
         isFull() {
-            if (this.line.editing) return true
+            if (this.line && this.line.editing) return true
             else return this.fullState
         },
         classStr() {
             var str = 'long-text'
-            if (this.line.editing) str += 'editing'
+            if (this.line && this.line.editing) str += 'editing'
             return str
         },
         txt() {
@@ -43,8 +43,8 @@ export default {
     },
     methods: {
         toggleFull() {
-            if (!this.line.editing) this.fullState = !this.fullState
-            if (!this.line.editing && this.isList) this.line.active = !this.line.active
+            if (this.line && !this.line.editing) this.fullState = !this.fullState
+            if (this.line && !this.line.editing && this.isList) this.line.active = !this.line.active
         },
         emit(event) {
             $emit('input', event.target.value)

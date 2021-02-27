@@ -8,7 +8,7 @@ export default {
             <template v-if="img.url">
                 <!-- <pre>{{getStyle()}}</pre> -->
                 <img  :src="img.url" alt="" class="note-img" :style="getStyle(idx)">
-                <delete-btn  class="btm-right" @delete="$emit('delete-img',img.id)" />
+                <delete-btn  class="top-right" @delete="$emit('delete-img',img.id)" />
             </template>
         </div>
     </div>

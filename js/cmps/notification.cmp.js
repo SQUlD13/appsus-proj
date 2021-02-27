@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     notif(notification) {
-      console.log('notifating..', notification)
+      console.log('notifying..', notification)
       this.notification = notification
       clearTimeout(this.notifTimeout)
       this.notifTimeout = setTimeout(() => (this.notification = null), 3000000)
@@ -31,6 +31,6 @@ export default {
     },
   },
   created() {
-    eventBus.$on('changes', this.notif)
+    eventBus.$on('notify', this.notif)
   },
 }

@@ -16,6 +16,7 @@
 }
 .nav-link-inactive{
     cursor: default;
+    user-select: none;
     color:var(--black);
 }
 .nav-link-inactive:hover{
