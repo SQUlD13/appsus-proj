@@ -17,3 +17,11 @@
 .mail-card button.checked {
   background-color: chartreuse;
 }
+
+.mail-card button {
+  padding: 0;
+}
+
+.mail-card .buttons-box > *:not(:last-child) {
+  margin-inline-end: 4px;
+}

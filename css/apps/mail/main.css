@@ -1,0 +1,4 @@
+.inner-content-container {
+  overflow-y: scroll;
+  max-height: 70vh;
+}

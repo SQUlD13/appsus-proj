@@ -11,6 +11,7 @@
 @import url('apps/keep/main.css');
 
 /* mail imports: */
+@import url('apps/mail/main.css');
 @import url('apps/mail/mail-control-bar.css');
 @import url('apps/mail/mail-nav.css');
 @import url('apps/mail/mail-card.css');

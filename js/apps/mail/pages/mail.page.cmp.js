@@ -13,7 +13,7 @@ export default {
           <mail-nav/>
           <div class="content-container flex-1">
             <mail-control-bar/>
-            <router-view v-if="mails.length" :mails="mailsToShow" @onFilter="filterBy"/>
+            <router-view v-if="mails.length" class="inner-content-container" :mails="mailsToShow" @onFilter="filterBy"/>
           </div>
         </main>
         <mail-box v-if="mailBoxOpen" @onCloseMailBox="mailBoxOpen = false"/>
