@@ -132,13 +132,6 @@ export default {
                 })
         }
     },
-    watch: {
-        note(val, newVal) {
-            //console.log('watching note. val', val.txt, 'newVal', newVal.txt)
-            this.note.txt = newVal.txt
-            this.$forceUpdate()
-        }
-    }
-    ,
+
     components: { addBtn, deleteBtn, longText, noteControls, noteImages, noteVideos }
 }

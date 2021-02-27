@@ -16,8 +16,10 @@ var gFilter = ''
 function query() {
     return storageService.query(KEEP_KEY)
         .then((notes) => {
-            _sortPinned(notes)
-            return Promise.resolve(notes)
+            var filtered = _Filter(notes)
+            console.log("🚀 ~ file: keep.service.js ~ line 20 ~ .then ~ filtered", filtered)
+            _sortPinned(filtered)
+            return Promise.resolve(filtered)
         })
 }
 
@@ -29,6 +31,23 @@ function _sortPinned(notes) {
     })
 }
 
+function _Filter(notes) {
+    if (!gFilter) return notes
+    return notes.filter((note) => {
+        var txtArr = note.txt.map((txt) => txt.txt.toLowerCase())
+
+        if (txtArr[0].includes(gFilter.toLowerCase())) {
+            console.log(gFilter)
+            return note
+        }
+    })
+}
+function setFilter(val) {
+    console.log("🚀 ~ file: keep.service.js ~ line 46 ~ setFilter ~ val", val)
+    gFilter = val
+    return Promise.resolve(gFilter)
+}
+
 function getNote(id) {
     return query()
         .then(notes => {
@@ -36,14 +55,12 @@ function getNote(id) {
         })
 }
 function deleteNote(id) {
-    console.log("🚀 ~ file: keep.service.js ~ line 29 ~ deleteNote ~ id", id)
     return storageService.remove(KEEP_KEY, id)
 }
 function updateNote(note) {
     return storageService.put(KEEP_KEY, note)
 }
 function addNote(note) {
-    //if (!note.id) note.id = utilService.makeId()
     return storageService.post(KEEP_KEY, note)
 }
 function addEmptyText(id) {
@@ -126,10 +143,10 @@ export const keepService = {
     deleteContentItem,
     toggleNoteList,
     toggleNotePin,
+    setFilter
 }
 
 function createNotes() {
-
     var notes = [
         addNote(createNote({ txt: ['Hello'] })),
         addNote(createNote({
