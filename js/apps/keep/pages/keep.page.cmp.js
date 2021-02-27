@@ -16,7 +16,7 @@ export default {
         <noteAdd @add-empty-note="addEmptyNote" @add-note="addNote" :note="newNote" @add-img="addImage"/>
         <section ref="grid" class="clean-list note-list">
             <!-- <transition-group name="list-column"> -->
-                
+                    <div class="gutter-sizer"></div>
                 <!-- <pre>{{note}}</pre> -->
                     <note  class="note-list-item" v-for="note in notes" :key="note.id" @update-masonry="setMasonry"
                     v-if="note.id !== 'note-add'" :note="note" @delete-note="deleteNote" @add-note="addNote" @update-notes="updateNotes" 
@@ -71,7 +71,7 @@ export default {
                 .then(notes => {
                     this.notes = notes
                     console.log('updating notes')
-                    this.masonry = new Masonry(this.$refs.grid, {})
+                    this.masonry = Masonry(this.$refs.grid, {})
 
                 })
         },
@@ -178,7 +178,7 @@ export default {
             this.$nextTick(() => {
                 this.masonry = new Masonry(this.$refs.grid, {
                     itemSelector: '.note',
-                    gutter: 5
+                    gutter: '.gutter-sizer'
                 })
             })
         }
@@ -190,7 +190,6 @@ export default {
         },
         'notes'(to) {
             this.masonry = new Masonry(this.$refs.grid)
-            console.log("🚀 ~ file: keep.page.cmp.js ~ line 188 ~ this.masonry", this.masonry)
         }
     },
     components: {

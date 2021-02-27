@@ -21,8 +21,9 @@
 @import url('apps/mail/mail-card.css');
 @import url('apps/mail/mail-box.cmp.css');
 
+
 .main-container {
-  max-width: 1080px;
+  width: 1080px;
   margin: 0 auto;
 }
 .home-page{
@@ -32,4 +33,15 @@
   flex-flow: column;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width:1100px){
+  .main-container{
+    max-width: 480px;
+    margin:0 auto;
+  }
+  .note .btn{
+    height:16px;
+    width:16px;
+  }
 }

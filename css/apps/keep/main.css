@@ -9,13 +9,15 @@
 .keep-app .note-list{
     /* display:flex;
     flex-flow: column wrap; */
-    width:80%;
+    /* width:1040px; */
     margin:0 auto;
     min-height:85vh;
 }
 
 .note-list-item{
     display:inline-flex;
-    width:50%;
+    width:500px;
     height:fit-content;
 }
+
+.gutter-sizer{width:10%;}
