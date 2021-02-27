@@ -19,7 +19,7 @@ export default {
       console.log('notifating..', notification)
       this.notification = notification
       clearTimeout(this.notifTimeout)
-      this.notifTimeout = setTimeout(() => (this.notification = null), 3000)
+      this.notifTimeout = setTimeout(() => (this.notification = null), 3000000)
     },
   },
   computed: {

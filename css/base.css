@@ -120,6 +120,7 @@ a {
   font-weight: bold;
   color: var(--m);
   text-decoration: none;
+  cursor: pointer;
 }
 a:hover {
   color: var(--s);

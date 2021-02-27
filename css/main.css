@@ -18,14 +18,15 @@
 @import url('apps/mail/mail-nav.css');
 @import url('apps/mail/mail-card.css');
 @import url('apps/mail/mail-box.cmp.css');
+@import url('apps/mail/mail-details.css');
 
 .main-container {
   max-width: 1080px;
   margin: 0 auto;
 }
-.home-page{
-  height:90vh;
-  width:100%;
+.home-page {
+  height: 90vh;
+  width: 100%;
   display: flex;
   flex-flow: column;
   justify-content: center;

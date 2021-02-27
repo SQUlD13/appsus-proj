@@ -11,7 +11,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
+  padding: 6px;
+}
+
+.header img {
+  object-fit: none;
 }
 
 .buttons-container-1 {
@@ -26,4 +30,11 @@
 
 .search-box {
   width: 200px;
+}
+
+.header .circle-a {
+  border-radius: 50%;
+}
+.header a:hover {
+  background-color: rgba(60, 64, 67, 0.08);
 }
