@@ -1,4 +1,5 @@
 .nav-btn-wrapper{
+    z-index: 100;
     display: flex;
     flex-flow: column;
     justify-content: center;

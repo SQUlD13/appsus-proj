@@ -53,21 +53,10 @@ img{
 
 /* ///////////////////////////////// */
 /* HEADER */
-header{
-    padding:15px;
-    font-size: 1.6rem;
-    background:var(--d);
-    
-}
 .logo{
     text-decoration: none;
     color: var(--l);
 }
-
-
-
-
-
 
 .tense{
     color:rgb(95, 25, 25)!important;

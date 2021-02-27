@@ -11,7 +11,10 @@ import { eventBus } from '../../../services/event-bus.service.js'
 export default {
     template: `
     <section class="keep-app main-container">
-        <h1>keepApp</h1>       
+        <header class="flex jcc aic column">
+            <h1>Keeps!</h1>  
+            <p>The place for all your note taking needs</p>     
+        </header>
         <!-- <pre>{{notes}}</pre>  -->
         <noteAdd @add-empty-note="addEmptyNote" @add-note="addNote" :note="newNote" @add-img="addImage"/>
         <section ref="grid" class="clean-list note-list">

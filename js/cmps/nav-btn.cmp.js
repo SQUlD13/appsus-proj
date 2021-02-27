@@ -1,7 +1,7 @@
 
 export default {
     template: `
-    <div class="nav-btn-wrapper">
+    <nav class="nav-btn-wrapper">
         <button  class="btn fas nav-btn" @click="active = !active">&#xf00a;</button>
         <transition name="fade">
         <div class="nav-link-wrapper" v-if="this.active" @blur="this.active = false">
@@ -10,7 +10,7 @@ export default {
             <router-link class="fas nav-link" to="/book"> &#xf02d;</router-link>
         </div>
         </transition>
-    </div>
+    </nav>
     `,
     data() {
         return {
