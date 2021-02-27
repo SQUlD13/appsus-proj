@@ -1,23 +1,14 @@
 @import url('../note-controls/note-controls.css');
 
-.keep-app{
-    height:100%;
-    width:100%;
-}
 
-.keep-app .note-list{
-    display:flex;
-    flex-flow: column wrap;
-    margin-block-end: 20px;
-    min-height:85vh;
-    max-height:200vh;
-}
 .keep-app .note{
     display: flex;
     flex-flow: column;
     position: relative;
     padding:5px;
-    width:100%;
+    width:85%;
+    margin:0 auto;
+    margin-block-end: 20px;
     box-shadow: 7px 7px 5px 3px rgba(34, 34, 34, .5);
 }
 .note-content{

@@ -1,13 +1,13 @@
 .note-img-wrapper{
     display: grid;
-    grid-template-columns: repeat(2,minmax(150px,1fr));
+    grid-template-columns: repeat(2,minmax(100px,1fr));
     grid-template-rows: auto;
     position:relative
 }
 .full-width{
     grid-column: 1/ span 2;
 }
-.note-img{
+.note-img-wrapper img{
     height:100%;
     width:100%;
 }

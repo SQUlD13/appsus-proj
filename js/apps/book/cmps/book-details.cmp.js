@@ -35,7 +35,7 @@ export default {
             </div>
             <nav class="book-nav flex space-evenly aic">
                 <router-link v-if="prevTag" :to="prevTag">Previous</router-link>
-                <router-link to="/">Back to Store</router-link>
+                <router-link to="/book">Back to Store</router-link>
                 <router-link v-if="nextTag" :to="nextTag">Next</router-link>
             </nav>
             

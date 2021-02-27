@@ -16,6 +16,9 @@ var gFilter = ''
 function query() {
     return storageService.query(KEEP_KEY)
         .then((notes) => {
+            console.log(notes)
+            notes.reverse()
+            console.log(notes)
             var filtered = _Filter(notes)
             _sortPinned(filtered)
             return Promise.resolve(filtered)
