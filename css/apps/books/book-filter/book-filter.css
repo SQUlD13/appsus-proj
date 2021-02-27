@@ -1,0 +1,48 @@
+.book-filter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--l);
+    padding:15px;
+    width:50%;
+    margin:10px auto;
+    border-radius: 5px;
+}
+.book-filter-form{
+    width:50%;
+    height:150px;
+}
+.book-filter .filter-text-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:relative;
+    width:100%;
+}
+.book-filter .delete-search{
+    cursor: pointer;
+    user-select: none;
+    color:#999;
+    position:absolute;
+    right:5px;
+    font-size:.7em;
+    text-align:center;
+}
+.filter-price > *{
+    width:50%;
+}
+.book-filter input{
+    display: flex;
+    width:100%;
+}
+
+.book-filter label{
+    margin-inline-end: 5px;
+}
+.book-filter label:last-of-type{
+    margin-inline-start: 5px;
+}
+.book-filter h1{
+    margin-block-end: 5px;
+}

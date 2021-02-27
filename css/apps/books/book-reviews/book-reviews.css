@@ -1,0 +1,18 @@
+.book-reviews{
+    width:20%;
+    height:100%;
+    margin-block-end: 20px;
+    padding-inline-start: 8px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+.reviews{
+    overflow: visible;
+}
+.reviews > h1{
+    margin-block-end: 15px;
+}
+.book-review{
+    font-size:1rem;
+    min-width: 200px;
+}

@@ -12,7 +12,7 @@
 /* Keep App */
 @import url('apps/keep/main.css');
 /* Book App */
-@import url('apps/books/books.css');
+@import url('apps/books/main.css');
 
 /* mail imports: */
 @import url('apps/mail/main.css');

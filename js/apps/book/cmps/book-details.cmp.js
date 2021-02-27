@@ -1,7 +1,7 @@
 import books from '../books.js'
 import { bookService } from '../services/book.service.js'
 import reviewAdd from './book-reviews.cmp.js'
-import longDescription from './long-text.cmp.js'
+import longDescription from '../../../cmps/long-text.cmp.js'
 export default {
     template: `
     <div v-if="book" class="book-details">
@@ -31,7 +31,7 @@ export default {
             </div>
             <div class="description">
                 <h1>Description :</h1>    
-                <longDescription class="light ":text="book.description" />
+                <longDescription class="light ":value="book.description" />
             </div>
             <nav class="book-nav flex space-evenly aic">
                 <router-link v-if="prevTag" :to="prevTag">Previous</router-link>
