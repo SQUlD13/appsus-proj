@@ -26,7 +26,9 @@ export default {
             </div>
 
             <button type="submit" class="search-button">
-              <a class="text-a">S</a>
+              <a class="text-a">
+                <img src="image/header/search.svg" alt="">
+              </a>
             </button>
           </form>
           <div class="search-options">

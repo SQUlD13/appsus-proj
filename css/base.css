@@ -244,6 +244,30 @@ iframe {
   height: 0;
   transition: height 0.25s ease;
 }
+
+/* .gush-enter-active,
+.gush-leave-active {
+  transition: transform 2s;
+  transform: translate(100%);
+}
+.gush-enter,
+.gush-leave-to {
+  transform: translate(0%);
+} */
+
+.gush-enter,
+.gush-leave-to {
+  transform: translate(0) !important;
+}
+.gush-enter-to,
+.gush-leave {
+  transform: translate(100%) !important;
+}
+.gush-enter-active,
+.gush-leave-active {
+  transition: transform 0.3s;
+}
+
 /* ///////////////////////////////// */
 /* HELPERS */
 /* FLEX - BASE */

@@ -8,7 +8,7 @@ import { eventBus } from '../../../services/event-bus.service.js'
 
 export default {
   template: `
-    <section class="mail-app debug">
+    <section class="mail-app">
         <main class="flex">
           <mail-nav/>
           <div class="content-container flex-1">

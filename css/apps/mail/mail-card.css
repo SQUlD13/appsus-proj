@@ -1,6 +1,6 @@
 .mail-card {
   padding: 10px 20px;
-  border: 1px solid black;
+  border-bottom: 1px solid grey;
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr 4fr 1fr;
