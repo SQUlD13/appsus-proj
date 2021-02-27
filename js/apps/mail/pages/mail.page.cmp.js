@@ -1,6 +1,6 @@
 import { mailService } from '../../../services/mail.service.js'
-import search from '../cmps/filter/search.cmp.js'
 import sort from '../cmps/filter/sort.cmp.js'
+import mailControlBar from '../cmps/mail-control-bar.cmp.js'
 import mailNav from '../cmps/mail-nav.cmp.js'
 import mailList from '../cmps/mail-list.cmp.js'
 import mailBox from '../cmps/mail-box.cmp.js'
@@ -8,11 +8,13 @@ import { eventBus } from '../../../services/event-bus.service.js'
 
 export default {
   template: `
-    <section class="mail-app">
-        <search @onSearchChange="changeSpecificFilter('search', $event)" @onSearchType="updateTmpSearchStr" :searchOptions="tmpSearchOptions"/>
-        <main class="main-container flex">
+    <section class="mail-app debug">
+        <main class="flex">
           <mail-nav/>
-          <router-view v-if="mails.length" :mails="mailsToShow" @onFilter="filterBy"/>
+          <div class="content-container flex-1">
+            <mail-control-bar/>
+            <router-view v-if="mails.length" :mails="mailsToShow" @onFilter="filterBy"/>
+          </div>
         </main>
         <mail-box v-if="mailBoxOpen" @onCloseMailBox="mailBoxOpen = false"/>
     </section>
@@ -35,6 +37,8 @@ export default {
       mailBoxOpen: false,
       searchOptions: [],
       tmpSearchStr: '',
+      strSearchFilter: '',
+      innerFilters: [],
     }
   },
   methods: {
@@ -59,28 +63,12 @@ export default {
         this.refreshMails(res)
       })
     },
-    changeSpecificFilter(filterType, updatedFilter) {
-      this.filtersMap[filterType] = updatedFilter
-    },
     isMatchSearch(mail, searcrhStr = this.filtersMap.search.str) {
       const lowerStr = searcrhStr.toLowerCase()
       const recieverMatch = mail.addresses.to.toLowerCase().includes(lowerStr)
       const subjectMatch = mail.content.subject.toLowerCase().includes(lowerStr)
       const bodyMatch = mail.content.body.toLowerCase().includes(lowerStr)
       return subjectMatch || bodyMatch || recieverMatch
-    },
-    isMatchGeneralFilters(mail) {
-      //returns true or false:
-      const { general } = this.filtersMap
-      let isMatchReadedFilter = true
-      let isMatchMarkedFilter = true
-      if (general.isReaded) {
-        isMatchReadedFilter = !mail.general.isReaded
-      }
-      if (general.isMarked) {
-        isMatchMarkedFilter = mail.general.isMarked
-      }
-      return isMatchReadedFilter && isMatchMarkedFilter
     },
     filterBy(filterEntity) {
       this.filtersMap.general = { isReaded: false, isMarked: false }
@@ -90,19 +78,62 @@ export default {
     updateTmpSearchStr(newSearchStr) {
       this.tmpSearchStr = newSearchStr
     },
+    isMatchNotReadedFilter(mail) {
+      return !mail.general.isReaded
+    },
+    isMatchMarkedFilter(mail) {
+      return mail.general.isMarked
+    },
+    updateFiltersByQuery(query = this.$route.query) {
+      this.strSearchFilter = ''
+      this.innerFilters = []
+
+      if (query.str) {
+        const { str } = query
+        this.strSearchFilter = str
+      }
+
+      if (query.innerFilters) {
+        const { innerFilters } = query
+        this.innerFilters = innerFilters.split(',')
+      }
+
+      this.updateSearchFilters()
+    },
+    updateSearchFilters() {
+      if (this.innerFilters.length) {
+        this.innerFilters.forEach((filter) => {
+          eventBus.$emit('onAddSearchInnerFilter', filter)
+        })
+      } else {
+        eventBus.$emit('onClearSearchInnerFilters')
+      }
+      console.log('emitting...')
+    },
   },
   computed: {
     mailsToShow() {
-      let mailsAfterSearchFilter = this.mails.filter((mail) => {
-        return this.isMatchSearch(mail)
-      })
+      let currMailsToShow = this.mails
 
-      let mailsAfterSearchAndGeneralFilter = mailsAfterSearchFilter.filter(
-        (mail) => {
-          return this.isMatchGeneralFilters(mail)
-        }
-      )
-      return mailsAfterSearchAndGeneralFilter
+      if (this.strSearchFilter) {
+        currMailsToShow = this.mails.filter((mail) => {
+          return this.isMatchSearch(mail, this.strSearchFilter)
+        })
+      }
+
+      if (this.innerFilters.includes('marked')) {
+        currMailsToShow = currMailsToShow.filter((mail) => {
+          return this.isMatchMarkedFilter(mail)
+        })
+      }
+
+      if (this.innerFilters.includes('notReaded')) {
+        currMailsToShow = currMailsToShow.filter((mail) => {
+          return this.isMatchNotReadedFilter(mail)
+        })
+      }
+
+      return currMailsToShow
     },
     tmpSearchOptions() {
       let mailsAfterSearchFilter = this.mails.filter((mail) => {
@@ -117,20 +148,56 @@ export default {
       return mailsAfterSearchAndGeneralFilter.slice(0, 4)
     },
   },
+  watch: {
+    '$route.query'(newVal) {
+      console.log('query change detected')
+      this.updateFiltersByQuery(newVal)
+    },
+    // '$route.query.str'(newVal) {
+    //   console.log(newVal)
+    //   this.str = newVal
+    // },
+    // '$route.query.innerFilters'(newVal) {
+    //   console.log(newVal)
+    //   if (newVal) this.innerFilters = newVal.split(',')
+    // },
+  },
   components: {
+    mailControlBar,
     mailList,
     mailNav,
     mailBox,
-    search,
     sort,
   },
   created() {
     const mails = mailService.getMails()
     mails.then(this.refreshMails)
 
+    //     if (this.$route.query.str) {
+    //       const { str } = this.$route.query
+    //       this.strSearchFilter = str
+    //     }
+    //
+    //     if (this.$route.query.innerFilters) {
+    //       const { innerFilters } = this.$route.query
+    //       this.innerFilters = innerFilters.split(',')
+    //     }
+
+    this.updateFiltersByQuery()
+
     eventBus.$on('changes', this.onChanges)
     eventBus.$on('onOpenMailBox', () => (this.mailBoxOpen = true))
     eventBus.$on('onReadedClick', this.toggleReaded)
     eventBus.$on('onMarkedClick', this.toggleMarked)
+    //
+    // setTimeout(() => {
+    //   this.$router.push({
+    //     path: '/mail',
+    //     query: {
+    //       innerFilters: 'shlomo,moyshe',
+    //       str: '',
+    //     },
+    //   })
+    // }, 1000)
   },
 }

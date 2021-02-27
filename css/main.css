@@ -3,10 +3,16 @@
 
 /* Header: */
 @import url('cmps/header/header.css');
+@import url('cmps/header/search.css');
+
+/* Notificaion */
+@import url('cmps/notification.css');
 
 @import url('apps/keep/main.css');
 
 /* mail imports: */
+@import url('apps/mail/mail-control-bar.css');
+@import url('apps/mail/mail-nav.css');
 @import url('apps/mail/mail-card.css');
 @import url('apps/mail/mail-box.cmp.css');
 

@@ -1,4 +1,4 @@
-import searchMail from '../../apps/mail/cmps/filter/search.cmp.js'
+import search from './search.cmp.js'
 
 export default {
   template: `
@@ -15,7 +15,7 @@ export default {
                 </a>
             </div>
 
-            <search-mail/>
+            <search/>
 
             <div class="buttons-container buttons-container-2 flex">
                 <a href="" class="header-info">
@@ -43,6 +43,6 @@ export default {
         </section>
     `,
   components: {
-    searchMail,
+    search,
   },
 }

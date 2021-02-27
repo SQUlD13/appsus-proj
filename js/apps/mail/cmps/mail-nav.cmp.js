@@ -2,11 +2,13 @@ import { eventBus } from '../../../services/event-bus.service.js'
 
 export default {
   template: `
-          <nav class="mail-nav flex column">
+          <nav class="mail-nav flex column align-center">
             <button class="create-mail-button" @click="createMail">+</button>
-            <router-link to="/mail">inbox</router-link>
-            <router-link to="/mail/filter-by/marked">marked</router-link>
-            <router-link to="/mail/filter-by/not-readed">not readed</router-link>
+            <div class="filters-box flex column">
+              <router-link class="center" to="/mail">I</router-link>
+              <router-link class="center" to="/mail?innerFilters=marked">F</router-link>
+              <router-link class="center" to="/mail?innerFilters=notReaded">N</router-link>
+            </div>
 
           </nav>
       `,
