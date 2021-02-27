@@ -62,7 +62,7 @@
     padding:0;
 }
 .note-content-list .note-text{
-    border:3px var(--s) solid;
+    border:3px var(--white) solid;
     border-width: 3px 0 3px 0;
 }
 .note .add-btn{
