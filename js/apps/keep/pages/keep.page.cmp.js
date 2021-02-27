@@ -1,9 +1,12 @@
 import { utilService } from '../../../services/util.service.js'
 import { keepService } from '../services/keep.service.js'
-import longText from '../../../cmps/long-text.cmp.js'
+// import longText from '../../../cmps/long-text.cmp.js'
 import note from '../cmps/note.cmp.js'
 import noteAdd from '../cmps/note-add.cmp.js'
 import { eventBus } from '../../../services/event-bus.service.js'
+
+// import Masonry from '../../../lib/masonry.pkgd.js';
+
 
 export default {
     template: `
@@ -11,25 +14,26 @@ export default {
         <h1>keepApp</h1>       
         <!-- <pre>{{notes}}</pre>  -->
         <noteAdd @add-empty-note="addEmptyNote" @add-note="addNote" :note="newNote" @add-img="addImage"/>
-        <ul v-if="notes" class="clean-list note-list">
+        <section ref="grid" class="clean-list note-list">
             <!-- <transition-group name="list-column"> -->
-                <li class="note-list-item" v-for="note in notes" :key="note.id">
+                
                 <!-- <pre>{{note}}</pre> -->
-                    <note  
+                    <note  class="note-list-item" v-for="note in notes" :key="note.id" @update-masonry="setMasonry"
                     v-if="note.id !== 'note-add'" :note="note" @delete-note="deleteNote" @add-note="addNote" @update-notes="updateNotes" 
                     @toggle-item="toggleItem" @text-change="updateText" @background-change="updateBackground"
                     @add-vid="addVideo" @add-img="addImage" @add-empty-line="addEmptyLine" @delete-line="deleteLine" 
                     @toggle-list="toggleList" @pin-note="pinNote"/>
                     <!-- @add-empty-line="addEmptyContentItem" @delete-note-item="deleteContentItem" -->
-                </li>
+                
             <!-- </transition-group> -->
-        </ul>
+        </section>
     </section>
     `,
     data() {
         return {
             notes: null,
-            newNote: null
+            newNote: null,
+            masonry: null,
         }
     },
     created() {
@@ -42,13 +46,19 @@ export default {
                                 .then((notes) => {
                                     notes.push(newNote)
                                     this.notes = notes
-                                    console.log(this.$route, 'query params on start')
                                 })
                         })
-                } else this.notes = notes
+                } else {
+                    this.notes = notes
+                    this.setMasonry()
+                }
             })
         var newNote = keepService.createNote({ txt: [' '], id: 'note-add', editing: [0] })
         this.newNote = newNote
+    },
+    mounted() {
+
+
     },
     methods: {
         deleteNote(id) {
@@ -61,6 +71,8 @@ export default {
                 .then(notes => {
                     this.notes = notes
                     console.log('updating notes')
+                    this.masonry = new Masonry(this.$refs.grid, {})
+
                 })
         },
         addNote(note) {
@@ -161,12 +173,24 @@ export default {
             console.log('calling pin note')
             keepService.toggleNotePin(noteId)
                 .then(this.updateNotes)
+        },
+        setMasonry() {
+            this.$nextTick(() => {
+                this.masonry = new Masonry(this.$refs.grid, {
+                    itemSelector: '.note',
+                    gutter: 5
+                })
+            })
         }
     },
     watch: {
         '$route.query'(to) {
             keepService.setFilter(to.str)
                 .then(this.updateNotes())
+        },
+        'notes'(to) {
+            this.masonry = new Masonry(this.$refs.grid)
+            console.log("🚀 ~ file: keep.page.cmp.js ~ line 188 ~ this.masonry", this.masonry)
         }
     },
     components: {

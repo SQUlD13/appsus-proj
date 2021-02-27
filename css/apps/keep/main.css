@@ -7,15 +7,15 @@
     width:100vw;
 }
 .keep-app .note-list{
-    display:flex;
-    flex-flow: column wrap;
+    /* display:flex;
+    flex-flow: column wrap; */
     width:80%;
     margin:0 auto;
     min-height:85vh;
-    max-height:200vh;
 }
 
 .note-list-item{
+    display:inline-flex;
     width:50%;
     height:fit-content;
 }

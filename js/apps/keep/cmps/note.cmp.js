@@ -15,10 +15,10 @@ export default {
         <!-- <pre>{{note}}</pre> -->
         <ul :class="contentClass">
             <note-images :note="note" 
-            @delete-img="(lineId)=>{$emit('delete-line',note.id,lineId,'img')}" />
+            @delete-img="(lineId)=>{$emit('delete-line',note.id,lineId,'img')}" @update-masonry="$emit('update-masonry')"/>
 
             <note-videos :videos="note.vid" 
-            @delete-vid="(vidId)=>{$emit('delete-line',note.id,vidId,'vid')}" />
+            @delete-vid="(vidId)=>{$emit('delete-line',note.id,vidId,'vid')}" @update-masonry="$emit('update-masonry')"/>
                 
             <li class="note-item" v-for="txt in note.txt" :key="txt.id">
                 <!-- <pre>text:{{txt}}</pre> -->

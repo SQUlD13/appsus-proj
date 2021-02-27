@@ -7,7 +7,7 @@ export default {
         <div class="note-img-wrapper pos-relative" v-for="(img,idx) in note.img">
             <template v-if="img.url">
                 <!-- <pre>{{getStyle()}}</pre> -->
-                <img  :src="img.url" alt="" class="note-img" :style="getStyle(idx)">
+                <img  :src="img.url" alt="" class="note-img" :style="getStyle(idx)" @load="$emit('update-masonry')">
                 <delete-btn  class="top-right" @delete="$emit('delete-img',img.id)" />
             </template>
         </div>
