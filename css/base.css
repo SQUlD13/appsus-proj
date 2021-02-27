@@ -4,7 +4,7 @@
   --s: #005b73;
   --l: #a1af9f;
   --m: #6e7b6c;
-  --d: #082c09;
+  --d: #13345a;
   --success: #2ecc71;
   --error: #e74c3c;
 }
@@ -69,16 +69,6 @@ a:active {
   src: url('./fonts/font-awesome/fa-brands-400.woff2');
 }
 
-:root {
-  --white: #f2fcf0;
-  --black: #002d43;
-  --s: #005b73;
-  --l: #a1af9f;
-  --m: #6e7b6c;
-  --d: #082c09;
-  --success: #2ecc71;
-  --error: #e74c3c;
-}
 * {
   box-sizing: border-box;
 }
