@@ -16,7 +16,6 @@ export default {
     data() {
         return {
             fullState: this.line.active,
-            txt: this.value,
         }
     },
     computed: {
@@ -30,13 +29,16 @@ export default {
             return str
         },
         isFull() {
-            if (this.line.editing || this.line.active) return true
+            if (this.line.editing) return true
             else return this.fullState
         },
         classStr() {
             var str = 'long-text'
             if (this.line.editing) str += 'editing'
             return str
+        },
+        txt() {
+            return this.value
         }
     },
     methods: {
@@ -52,5 +54,5 @@ export default {
             var src = evt.target.innerText
             this.$emit('text-change', src)
         },
-    },
+    }
 }
