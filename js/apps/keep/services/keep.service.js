@@ -76,9 +76,9 @@ function deleteContentItem(noteId, contentId, type) {
                 note[type].splice(contentIdx, 1)
                 this.note = note
                 return keepService.updateNote(note)
-                    .then(() => Promise.resolve(note))
+                    .then(() => { return Promise.resolve(note) })
             } else {
-                Promise.reject('Cannot delete the last line - please delete the note if you wish to do so')
+                return Promise.reject('Cannot delete the last line - please delete the note if you wish to do so')
             }
         })
 }

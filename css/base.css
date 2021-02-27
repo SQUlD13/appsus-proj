@@ -51,7 +51,6 @@ a {
 }
 a:hover {
   color: var(--s);
-  font-style: italic;
 }
 a:active {
   color: var(--d);
@@ -123,7 +122,6 @@ a {
 }
 a:hover {
   color: var(--s);
-  font-style: italic;
 }
 a:active {
   color: var(--d);
@@ -158,7 +156,6 @@ iframe {
 .btn:hover {
   box-shadow: 0 0 5px 3px rgba(255, 250, 250, 0.5);
   background: var(--s);
-  font-style: italic;
   transition: background 0.25s ease;
 }
 .btn:active {
