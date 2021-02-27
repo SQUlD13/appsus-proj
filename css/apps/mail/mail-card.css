@@ -4,6 +4,7 @@
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr 4fr 1fr;
+  transition: all 0.3s;
 }
 .mail-card:hover {
   box-shadow: 0 6px 4px -4px rgb(0 0 0 / 70%);
@@ -12,7 +13,6 @@
 .mail-card > *:not(:last-child) {
   margin-inline-end: 1rem;
 }
-
 .card-mail-title {
   color: var(--black);
 }
@@ -31,5 +31,11 @@
 
 /* not-readed: */
 
-.mail-card.not-readed {
+.mail-card.mail-card.not-readed {
+}
+
+.mail-card.not-readed .mail-reciever,
+.mail-card.not-readed .card-mail-title,
+.mail-card.not-readed .mail-time {
+  font-weight: bold;
 }

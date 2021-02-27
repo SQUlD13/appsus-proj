@@ -109,6 +109,7 @@ a {
   font-weight: bold;
   color: var(--m);
   text-decoration: none;
+  cursor: pointer;
 }
 a:hover {
   color: var(--s);
@@ -308,6 +309,9 @@ iframe {
 }
 .align-center {
   align-items: center;
+}
+.align-end {
+  align-items: flex-end;
 }
 .space-between {
   justify-content: space-between;

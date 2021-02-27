@@ -15,7 +15,7 @@ export default {
             </a>
         </div> -->
         <nav-btn></nav-btn>
-        <search/>
+        <search v-if="isntBooks"/>
         <!-- <div class="buttons-container buttons-container-2 flex">
             <a href="" class="header-info">
                 <img src="image/header/info.svg" alt="i" class="header-info-img">
@@ -34,6 +34,11 @@ export default {
         
     </header>
     `,
+    computed: {
+        isntBooks() {
+            return (!this.$route.path.includes('/book'))
+        }
+    },
     components: {
         search, navBtn
     },

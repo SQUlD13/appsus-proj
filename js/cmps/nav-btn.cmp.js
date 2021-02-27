@@ -17,5 +17,10 @@ export default {
             active: false
         }
     },
+    watch: {
+        'this.$route.path'() {
+            this.active = false;
+        }
+    }
 
 }

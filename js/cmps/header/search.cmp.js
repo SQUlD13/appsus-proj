@@ -4,11 +4,8 @@ import { eventBus } from '../../services/event-bus.service.js'
 export default {
   // props: ['searchOptions'],
   template: `
-        <div class="search-box flex-1 flex column">
+        <div class="search-box flex column">
           <form  @submit.prevent="routSearch" class="flex">
-            <a href="" class="options">
-              <img class="icon center" src="" alt="O">
-            </a>
 
             <div class="input-box flex-1 flex">
               <input type="text" class="search-input flex-1" placeholder="search in Appsus" v-model="strSearchFilter" @focus="turnOnSearchFocus"
@@ -20,8 +17,8 @@ export default {
                  <p>{{currAppName}}</p>
                </button>
                <button v-for="innerFilter in innerFilters" class="search-inner-filter search-filter-a center" @click="removeinnerFilter(innerFilter)">
-                 <p>{{innerFilter}}</p>
-                 <img src="" alt="X">
+                 <p class="filter-name">{{innerFilter}}</p>
+                  <p style="font-weight: bold;">X</p>
                </button>
             </div>
 

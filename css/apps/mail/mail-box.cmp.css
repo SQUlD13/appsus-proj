@@ -2,14 +2,52 @@
   position: fixed;
   bottom: 0;
   left: 10%;
-  padding: 20px 10px;
   padding-top: 0;
   background-color: white;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   box-shadow: #3e3e3e 0 0 3px;
   z-index: 30;
+  background: #404040;
 }
-.mail-box > * {
+.mail-box-content-box > * {
   margin-bottom: 1rem;
+}
+
+.mail-box .card-edge {
+  padding: 10px 10px;
+}
+
+.mail-box .card-edge > * {
+  color: white;
+}
+
+.mail-box .input-box {
+  border-bottom: 1px solid#dcdcdc;
+  color: #777;
+}
+
+.mail-box-content-box {
+  background: white;
+  padding: 10px 12px;
+}
+.mail-box input {
+  background: unset;
+  color: black;
+}
+
+.mail-box textarea {
+  border: unset;
+  background: unset;
+}
+
+.mail-box .send-mail-button {
+  background-color: #1a73e8;
+  color: white;
+  padding: 0.4rem 1rem;
+  font-weight: unset;
+  border-radius: 3px;
+}
+.mail-box .send-mail-button:hover {
+  background-color: #378bf8;
 }

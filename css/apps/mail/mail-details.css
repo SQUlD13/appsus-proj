@@ -1,0 +1,32 @@
+.mail-details {
+  padding: 20px;
+  padding-inline-start: 70px;
+  max-width: 1060px;
+}
+
+.mail-details > .text-box > p:first-of-type {
+  padding-inline-start: 24px;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.mail-details img {
+  height: 24px;
+}
+
+.details-box {
+  max-width: 500px;
+}
+
+.details-box p:first-child {
+  margin-bottom: 0.1rem;
+  font-weight: bold;
+}
+
+.details-box p:nth-child(2) {
+  margin-bottom: 1.2rem;
+}
+
+.details-box p:last-of-type {
+  line-height: 1.3rem;
+}

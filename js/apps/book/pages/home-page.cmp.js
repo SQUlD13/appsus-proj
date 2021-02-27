@@ -1,6 +1,6 @@
 export default {
-    template: `
-        <div class="home-page">
+  template: `
+        <div class="book-home-page home-page">
             <div class="img-container-splash">
                 <div class="splash-darken"></div>
                 <img class="fit-cover splash" src="../img/splash-screen.jpg"/>

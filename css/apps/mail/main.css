@@ -2,3 +2,18 @@
   overflow-y: scroll;
   max-height: 70vh;
 }
+
+.mail-list {
+  padding-bottom: 10px;
+}
+
+.mail-buttons-box img {
+  object-fit: none;
+}
+
+.mail-app .circle-a {
+  border-radius: 50%;
+}
+.mail-app a:hover:not(.avoid-default-a) {
+  background-color: rgba(60, 64, 67, 0.08);
+}

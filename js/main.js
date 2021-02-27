@@ -1,5 +1,5 @@
 import router from './routes.js'
-import pageHeader from './cmps/header/header.cmp.js'
+import pageHeader from './cmps/header/header-test.cmp.js'
 import notification from './cmps/notification.cmp.js'
 const options = {
   el: '#app',
