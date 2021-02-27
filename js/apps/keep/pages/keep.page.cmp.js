@@ -39,6 +39,7 @@ export default {
                                 .then((notes) => {
                                     notes.push(newNote)
                                     this.notes = notes
+                                    console.log(this.$route.query, 'query params on start')
                                 })
                         })
                 } else this.notes = notes
@@ -101,7 +102,6 @@ export default {
                 })
         },
         updateText(noteId, itemId, val) {
-            console.log("🚀 ~ file: keep.page.cmp.js ~ line 92 ~ updateText ~ val", val, itemId)
             keepService.getNote(noteId)
                 .then(note => {
                     var idx = note.txt.findIndex(text => text.id === itemId)
@@ -144,6 +144,12 @@ export default {
                 })
         }
 
+    },
+    watch: {
+        '$route.query'(to) {
+            keepService.setFilter(to.str)
+                .then(this.updateNotes())
+        }
     },
     components: {
         note,
