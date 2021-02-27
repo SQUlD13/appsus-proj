@@ -3,15 +3,15 @@ import { eventBus } from '../../../services/event-bus.service.js'
 export default {
   props: ['mail'],
   template: `
-        <article class="mail-card">
+        <article class="mail-card" :class="cardNotReadedClass">
             <div class="buttons-box flex align-center">
               <a class="check-button" @click.prevent>
                 <img src="image/filters/checkbox.png" alt="">
               </a>
-              <a class="readed-button" :class="readedClass" @click.prevent="emitReadedToggle">
+              <a class="readed-button" :class="markedClass" @click.prevent="emitMarkedToggle">
                 <img src="image/filters/marked.png" alt="">
               </a>
-              <a class="mark-button" :class="markedClass" @click.prevent="emitMarkedToggle">
+              <a class="mark-button" :class="readedClass" @click.prevent="emitReadedToggle">
                 <img src="image/filters/not-readed.png" alt="">
               </a>
             </div>
@@ -73,6 +73,9 @@ export default {
       return {
         checked: this.mail.general.isMarked === true,
       }
+    },
+    cardNotReadedClass() {
+      return { 'not-readed': !this.mail.general.isReaded }
     },
   },
 }

@@ -5,6 +5,9 @@
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr 4fr 1fr;
 }
+.mail-card:hover {
+  box-shadow: 0 6px 4px -4px rgb(0 0 0 / 70%);
+}
 
 .mail-card > *:not(:last-child) {
   margin-inline-end: 1rem;
@@ -24,4 +27,10 @@
 
 .mail-card .buttons-box > *:not(:last-child) {
   margin-inline-end: 4px;
+}
+
+/* not-readed: */
+
+.mail-card.not-readed {
+  background-color: blue;
 }
