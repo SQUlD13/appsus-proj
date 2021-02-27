@@ -6,7 +6,7 @@ const options = {
   router: router,
   template: `
       <section class="page">
-          <page-header/>
+          <page-header v-if="isHeaderShow"/>
           <notification/>
           <router-view/>
         </section>  
@@ -14,6 +14,12 @@ const options = {
   components: {
     notification,
     pageHeader,
+  },
+  computed: {
+    isHeaderShow() {
+      const currPath = this.$route.path
+      return currPath === '/mail' || currPath === '/keep'
+    },
   },
 }
 

@@ -18,12 +18,12 @@
   object-fit: none;
 }
 
-.buttons-container-1 {
+/* .buttons-container-1 {
   margin-inline-end: 200px;
 }
 .buttons-container-2 {
   margin-inline-start: 200px;
-}
+} */
 .buttons-container > *:not(:last-child) {
   margin-inline-end: 15px;
 }

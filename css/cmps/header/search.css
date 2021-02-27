@@ -3,16 +3,13 @@
 .search-box {
   border-radius: 8px;
   font-size: 1.2rem;
-  background-color: #f1f3f4;
+  background-color: #a0cadf;
   position: relative;
+  width: 500px;
 }
 
 .search-box * {
   color: black !important;
-}
-
-.search-box > form > * {
-  /* outline: 1px solid; */
 }
 
 .search-box input {
@@ -48,4 +45,7 @@
 
 .search-filters-box p {
   font-size: 0.8rem;
+}
+.search-filters-a .filter-name {
+  margin-inline-end: 0.6rem;
 }
