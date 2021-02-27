@@ -71,8 +71,7 @@ export default {
                 .then(notes => {
                     this.notes = notes
                     console.log('updating notes')
-                    this.masonry = Masonry(this.$refs.grid, {})
-
+                    this.setMasonry()
                 })
         },
         addNote(note) {
