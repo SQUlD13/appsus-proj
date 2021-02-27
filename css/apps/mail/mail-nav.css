@@ -1,25 +1,68 @@
 .mail-nav {
+  position: relative;
+  transform: translate(0);
+  z-index: 10;
+}
+
+.full-nav {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(100%);
+  width: 210px;
+  height: 100%;
+  z-index: -1;
+  padding-top: 10px;
+  box-shadow: 6px 0px 4px -4px rgb(0 0 0 / 70%);
+}
+
+.background-wrapper {
+  height: 100%;
+  background: var(--white);
   padding: 10px;
 }
 
-.mail-nav > *:not(:last-child) {
+.mail-nav-part {
+  background: var(--white);
+}
+.mail-nav > .background-wrapper > *:first-child {
+  margin-bottom: 20px;
+}
+.mail-nav-part:not(.mail-nav) > *:first-child {
   margin-bottom: 20px;
 }
 
+.create-mail-button-part {
+  height: 50px;
+}
 .create-mail-button {
   width: 50px;
-  height: 50px;
   border-radius: 25px;
+  box-shadow: dimgrey 0 0 3px 0px;
   border: unset;
   outline: unset;
-  box-shadow: dimgrey 0 0 3px 0px;
 }
-.filters-box > * {
-  height: 30px;
-  width: 30px;
-  background-color: turquoise;
+.create-mail-tag {
+  background: unset;
+  border: unset;
+  outline: unset;
 }
 
-.filters-box > *:not(:last-child) {
+.filters-box-part {
+  width: 100%;
+}
+.filters-box-part > * {
+  height: 30px;
+}
+.filters-box > * {
+  /* width: 30px; */
+}
+
+.filters-box-part > *:not(:last-child) {
   margin-bottom: 5px;
+}
+.filters-box-tag > * {
+  border-top-right-radius: 70px;
+  border-bottom-right-radius: 70px;
+  border: 1px solid;
 }

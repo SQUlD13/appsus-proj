@@ -2,8 +2,10 @@
   padding: 10px 20px;
 }
 
-.header img {
-  width: 40px;
+.header a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .header a:not(.text-a) {
   display: flex;
@@ -25,4 +27,3 @@
 .search-box {
   width: 200px;
 }
-
