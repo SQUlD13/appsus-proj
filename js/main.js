@@ -18,7 +18,7 @@ const options = {
   computed: {
     isHeaderShow() {
       const currPath = this.$route.path
-      return currPath === '/mail' || currPath === '/keep'
+      return currPath.includes('/mail') || currPath.includes('/keep')
     },
   },
 }

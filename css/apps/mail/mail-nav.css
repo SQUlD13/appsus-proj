@@ -12,14 +12,12 @@
   width: 210px;
   height: 100%;
   z-index: -1;
-  padding-top: 10px;
   box-shadow: 6px 0px 4px -4px rgb(0 0 0 / 70%);
 }
 
 .background-wrapper {
   height: 100%;
   background: var(--white);
-  padding: 10px;
 }
 
 .mail-nav-part {
@@ -55,7 +53,7 @@
   height: 30px;
 }
 .filters-box > * {
-  /* width: 30px; */
+  width: 70px;
 }
 
 .filters-box-part > *:not(:last-child) {
@@ -64,5 +62,8 @@
 .filters-box-tag > * {
   border-top-right-radius: 70px;
   border-bottom-right-radius: 70px;
-  border: 1px solid;
+}
+
+.inbox-hovered {
+  background-color: red;
 }
