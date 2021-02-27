@@ -101,7 +101,7 @@ export default {
                 })
         },
         updateText(noteId, itemId, val) {
-            console.log("🚀 ~ file: keep.page.cmp.js ~ line 92 ~ updateText ~ val", val)
+            console.log("🚀 ~ file: keep.page.cmp.js ~ line 92 ~ updateText ~ val", val, itemId)
             keepService.getNote(noteId)
                 .then(note => {
                     var idx = note.txt.findIndex(text => text.id === itemId)

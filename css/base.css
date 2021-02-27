@@ -71,6 +71,9 @@ textarea:focus,
 input:focus {
   outline: none;
 }
+iframe{
+  border:0;
+}
 .btn{
     cursor: pointer;
     position:relative;
@@ -95,7 +98,6 @@ input:focus {
 }
 .btn:focus{
     border:3px rgba(255, 250, 250, 0.75) solid;
->>>>>>> 06a712c1ddddeaa4716047518c4a6298ee0818a7
 }
 
 
@@ -177,6 +179,9 @@ input:focus {
 /* ///////////////////////////////// */
 /* HELPERS */
 /* FLEX - BASE */
+.pos-relative{
+  position: relative;
+}
 .column {
   flex-direction: column;
 }

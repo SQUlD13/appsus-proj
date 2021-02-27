@@ -1,15 +1,8 @@
-.note-images{
-    /* flex-wrap: wrap;
-    max-height:500px;
-    overflow-y: auto; */
+.note-img-wrapper{
     display: grid;
     grid-template-columns: repeat(2,minmax(150px,1fr));
     grid-template-rows: auto;
-}
-.note-img-wrapper{
-    position: relative;
-    /* height:100%;
-    width:100%; */
+    position:relative
 }
 .full-width{
     grid-column: 1/ span 2;

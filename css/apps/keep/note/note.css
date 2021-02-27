@@ -29,8 +29,12 @@
 }
 .note-text p{
     width:100%;
+    min-height: 1em;
     cursor: pointer;
     overflow-wrap: break-word;
+    backdrop-filter: brightness(.7);
+    padding:5px;
+    border-radius: 5px;
 }
 
 .note-text{
@@ -57,12 +61,10 @@
     flex-flow: column;
     margin:0;
     padding:0;
-    max-height: 500px;
 }
 .note-content-list .note-text{
     border:3px var(--s) solid;
     border-width: 3px 0 3px 0;
-    margin:5px;
 }
 .note .add-btn{
     align-self: center;

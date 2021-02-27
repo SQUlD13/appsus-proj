@@ -25,10 +25,10 @@ export default {
             <li class="note-item" v-for="txt in note.txt" :key="txt.id">
                 <!-- <pre>text:{{txt}}</pre> -->
                 <long-text v-if="txt.txt || txt.txt === ''" :value="txt.txt" class="note-text" :line="txt" :isList="note.isList" :style="getStyle(txt.active)" 
-                 @update-text="(val)=>{$emit('text-change',note.id,txt.id,val)}" @click="toggleItem(txt.id)" /> 
+                 @update-text="(val)=>{$emit('text-change',note.id,txt.id,val); txt.txt = val}" @click="toggleItem(txt.id)" /> 
                 <delete-btn v-if="(txt.txt || txt.txt === '') && note.isList" @delete="deleteLine(txt.id,'txt')" />
                 <!-- @delete="$emit('delete-note-item',note.id,txt.id,'txt')" -->
-                <button class="btn invert-btn" @click="txt.editing = !txt.editing" :style="background">edit text</button>                
+                <button class="btn invert-btn fas" @click="txt.editing = !txt.editing" :style="'color:'+note.color+';'">&#xf044;</button>                
             </li>
 
             <add-btn v-if="this.note.isList"  @add="addEmptyLine" />
@@ -70,7 +70,7 @@ export default {
             //this.color = color
         },
         getStyle(activeBool) {
-            return (activeBool) ? this.textStyle : 'text-decoration: line-through;' + this.textStyle
+            return (activeBool) ? '' : 'text-decoration: line-through;'
         },
         saveNote() {
             keepService.getNote(this.note.id)
@@ -94,7 +94,7 @@ export default {
                                 //.then(() => { this.$emit('toggle-list', this.note.id) })
                                 .then(() => {
                                     //this.$emit('update-notes')
-                                    this.$forceUpdate()
+                                    //this.$forceUpdate()
                                 })
                         }))
                     // this.updateNotes()

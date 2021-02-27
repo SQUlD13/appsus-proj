@@ -29,7 +29,7 @@ export default {
             return str
         },
         isFull() {
-            if (this.line.editing || this.line.active) return true
+            if (this.line.editing) return true
             else return this.fullState
         },
         classStr() {

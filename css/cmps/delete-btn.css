@@ -3,3 +3,8 @@
     top:0;
     right:0;
 }
+.btm-right{
+    position:absolute;
+    bottom: 0;
+    right:0;
+}
