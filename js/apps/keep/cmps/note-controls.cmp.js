@@ -31,7 +31,7 @@ export default {
 
         <form v-if="search" @submit="$emit('add-'+search, searchVal)">
             <input v-model="searchVal" type="text" >
-            <button type="submit"> submit </button>
+            <button class="fas btn" type="submit" :style="color + 'background:transparent;'"> &#xf00c; </button>
         </form>
     </div>
     `,
