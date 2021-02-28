@@ -2,6 +2,10 @@
     margin-block-start: 15px;
     font-size: 26px;
 }
-.main-header .nav-btn-wrapper{
-    /* margin-inline-start: 50px; */
+.main-header .nav-link{
+    color:var(--black);
+}
+
+.main-header .nav-link:hover{
+    color:var(--s);
 }
