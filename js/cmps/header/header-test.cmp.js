@@ -5,7 +5,7 @@ export default {
     <header class="main-header flex space-evenly align-center">
         <nav-btn/>
         <search v-if="isntBooks"/>
-        <router-link class="fas nav-link" to="/">&#xf015;</router-link>
+        <router-link class="fas nav-link" to="/about">&#xf059;</router-link>
         
     </header>
     `,

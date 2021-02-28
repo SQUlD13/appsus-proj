@@ -115,23 +115,9 @@ export default {
       return start + ' App'
     },
   },
-  watch: {
-    // searchFilter: {
-    //   handler(newVal) {
-    //     this.$emit('onSearchType', newVal.str)
-    //   },
-    //   deep: true,
-    // },
-    // searchOptions(newVal) {
-    //   console.log(newVal)
-    // },
-  },
   created() {
     eventBus.$on('onAddSearchInnerFilter', this.addInnerFilter)
     eventBus.$on('onRemoveSearchInnerFilter', this.removeInnerFilter)
     eventBus.$on('onClearSearchInnerFilters', this.clearInnerFilters)
-  },
-  components: {
-    // searchOption,
   },
 }

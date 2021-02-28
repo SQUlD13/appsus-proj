@@ -1,0 +1,35 @@
+.about {
+  width: 50%;
+  height:85vh;
+  margin: 0 auto;
+  padding: 15px;
+  border-radius: 5px;
+  justify-content: center;
+  font-size: 1rem;
+  margin-block-start: 20px;
+  background: var(--black);
+}
+.about h1 {
+  font-size: 1.5em;
+  color:var(--m)
+}
+.about h2 {
+    color:var(--m)
+}
+.about p {
+    font-size: 1.2em;
+    color:var(--l)
+}
+.about a {
+    color:var(--s);
+    filter: none;
+}
+.about-content{
+    margin:20px auto;
+}
+.about-content > *{
+    margin-block-end: 10px;
+}
+.about a:hover{
+    color:var(--white);
+}

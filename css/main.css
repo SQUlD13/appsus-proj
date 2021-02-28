@@ -16,6 +16,10 @@
 /* Book App */
 @import url('apps/books/main.css');
 
+/* Pages */
+@import url('pages/home-page.css');
+@import url('pages/about-page.css');
+
 /* mail imports: */
 @import url('apps/mail/main.css');
 @import url('apps/mail/mail-control-bar.css');
@@ -28,14 +32,6 @@
 .main-container {
   width: 1080px;
   margin: 0 auto;
-}
-.home-page {
-  height: 90vh;
-  width: 100%;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
 }
 
 @media (max-width:1100px){

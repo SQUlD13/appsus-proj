@@ -13,6 +13,7 @@
   padding: 0.8rem 0.8rem;
   font-size: 1.2rem;
   background-color: unset;
+  border: none;
 }
 .search-box button {
   background-color: unset;
@@ -21,9 +22,11 @@
 }
 
 .search-input:active{
+  border: none;
   background: var(--m);
 }
 .search-input:focus{
+  border: none;
   background: var(--s);
 }
 
