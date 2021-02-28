@@ -12,9 +12,14 @@
 .nav-link:hover{
     color:var(--l);
 }
-.nab-link:active{
+.nav-link:active{
     color:var(--d);
 }
+.nav-link.active{
+    color:var(--s);
+}
+
+
 .nav-link-inactive{
     cursor: default;
     user-select: none;
