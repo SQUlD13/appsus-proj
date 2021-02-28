@@ -23,7 +23,8 @@ export default {
         }
     },
     watch: {
-        'this.path'() {
+        $route() {
+            console.log('path change')
             this.active = false;
         }
     }

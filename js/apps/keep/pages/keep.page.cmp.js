@@ -18,7 +18,6 @@ export default {
         <!-- <pre>{{notes}}</pre>  -->
         <noteAdd @add-empty-note="addEmptyNote" @add-note="addNote" :note="newNote" @add-img="addImage"/>
         <section ref="grid" class="clean-list note-list">
-            <!-- <transition-group name="list-column"> -->
                     <div class="gutter-sizer"></div>
                 <!-- <pre>{{note}}</pre> -->
                     <note  class="note-list-item" v-for="note in notes" :key="note.id" @update-masonry="setMasonry"
@@ -26,9 +25,7 @@ export default {
                     @toggle-item="toggleItem" @text-change="updateText" @background-change="updateBackground"
                     @add-vid="addVideo" @add-img="addImage" @add-empty-line="addEmptyLine" @delete-line="deleteLine" 
                     @toggle-list="toggleList" @pin-note="pinNote"/>
-                    <!-- @add-empty-line="addEmptyContentItem" @delete-note-item="deleteContentItem" -->
                 
-            <!-- </transition-group> -->
         </section>
     </section>
     `,

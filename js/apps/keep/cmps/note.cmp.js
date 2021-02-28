@@ -35,7 +35,7 @@ export default {
 
         <note-controls class="flex jcc auc" :note="note" @toggle-list="$emit('toggle-list',note.id)" @background-change="$emit('background-change',note.id,note.color)" 
         @delete-note="$emit('delete-note',note.id)" @background-save="saveNote" @add-img="(url)=>$emit('add-img',note.id,url)"
-        @add-vid="(url)=>$emit('add-vid',note.id,url)" @pin-note="$emit('pin-note',note.id)"></note-controls>
+        @add-vid="(url)=>$emit('add-vid',note.id,url)" @pin-note="$emit('pin-note',note.id)" @update-masonry="$emit('update-masonry')"></note-controls>
 </div>
     `,
     data() {

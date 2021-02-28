@@ -1,3 +1,6 @@
-header > *{
+.main-header > *{
     font-size: 36px;
+}
+.main-header .nav-btn-wrapper{
+    /* margin-inline-start: 50px; */
 }

@@ -18,7 +18,7 @@
 }
 .book-preview::before{
     opacity:0;
-    background: rgba(245, 215, 119, 0.2);
+    background: rgba(119, 226, 245, 0.33);
     top:0;
     left:0;
     height: 100%;

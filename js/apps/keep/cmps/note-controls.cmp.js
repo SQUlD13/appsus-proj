@@ -4,7 +4,7 @@ import { keepService } from '../services/keep.service.js'
 export default {
     props: ['note'],
     template: `
-    <div class="note-controls">
+    <div class="note-controls flex column jcc aic">
     <!-- <pre>{{note}}</pre> -->
         <div class="main-note-controls">
             <button class="btn center invert-btn note-cntrl-btn" >
@@ -68,6 +68,7 @@ export default {
         toggleSearch(val) {
             if (this.search === val) this.search = null
             else this.search = val
+            this.$emit('update-masonry')
         }
     },
     components: { deleteBtn }

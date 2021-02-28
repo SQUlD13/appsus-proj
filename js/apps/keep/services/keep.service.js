@@ -9,7 +9,7 @@ const DEMO_GIFS = [
     'https://media1.giphy.com/media/xT3i1c7aHa8zqC7Rv2/giphy.gif?cid=ecf05e47g5j6pe8ga7n4ph9ilr22lbx3r9pw4td64bgc3w5w&rid=giphy.gif',
     'https://media0.giphy.com/media/eh9iOB34FwMow/giphy.gif?cid=ecf05e472z13xl52i7lakough5jsfr23h60datijltvvzkcc&rid=giphy.gif'
 ]
-const DEMO_VIDS = ['https://www.youtube.com/embed/_-0b6HhzNGs']
+const DEMO_VIDS = ['https://www.youtube.com/embed/_-0b6HhzNGs', 'https://www.youtube.com/embed/IJrKlSkxRHA']
 
 var gFilter = ''
 
