@@ -5,7 +5,7 @@ export default {
     <section class="home-page">
         <div class="img-container-splash">
             <div class="splash-darken"></div>
-            <img class="fit-cover splash" src="../image/splash-screen.jpg"/>
+            <img class="fit-cover splash" src="image/splash-screen.jpg"/>
         </div>
         <div class="home-content main-container">
             <h1>Welcome to appsus</h1>
