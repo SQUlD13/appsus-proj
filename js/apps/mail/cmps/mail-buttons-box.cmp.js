@@ -8,10 +8,10 @@ export default {
                 <img src="image/filters/checkbox.png" alt="" style="height: 24px;">
               </a>
               <a class="readed-button" :class="markedClass" @click.prevent="emitMarkedToggle">
-                <img src="image/filters/marked.png" alt="" style="height: 24px;">
+                <img :src="markedImg" alt="" style="height: 24px;">
               </a>
               <a class="mark-button" :class="readedClass" @click.prevent="emitReadedToggle">
-                <img src="image/filters/not-readed.png" alt="" style="height: 24px;">
+                <img :src="notReadedImg" alt="" style="height: 24px;">
               </a>
         </div>
     `,
@@ -33,6 +33,14 @@ export default {
       return {
         checked: this.mail.general.isMarked === true,
       }
+    },
+    markedImg() {
+      if (this.mail.general.isMarked) return 'image/filters/marked.png'
+      return 'image/filters/marked-not-checked.png'
+    },
+    notReadedImg() {
+      if (!this.mail.general.isReaded) return 'image/filters/not-readed.png'
+      return 'image/filters/not-readed-not-checked.png'
     },
   },
 }
