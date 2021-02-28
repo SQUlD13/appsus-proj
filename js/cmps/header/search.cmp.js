@@ -9,7 +9,7 @@ export default {
 
             <div class="input-box flex-1 flex">
               <input type="text" class="search-input flex-1" placeholder="search in Appsus" v-model="strSearchFilter" @focus="turnOnSearchFocus"
-              @blur="turnOffSearchFocus">
+              @blur="turnOffSearchFocus" @input="checkEmpty">
             </div>
 
              <div class="search-filters-box flex">
@@ -23,8 +23,8 @@ export default {
             </div>
 
             <button type="submit" class="search-button">
-              <a class="text-a">
-                <img src="image/header/search.svg" alt="">
+              <a class="fas search-btn-icon text-a" :style="'color:var(--white);'">
+                &#xf002;
               </a>
             </button>
           </form>
@@ -83,6 +83,9 @@ export default {
     routSearch() {
       this.$router.push(this.searchRoutDetails)
     },
+    checkEmpty() {
+      if (this.strSearchFilter === '') this.routSearch()
+    }
   },
   computed: {
     isShowOptions() {
@@ -107,7 +110,9 @@ export default {
       return res
     },
     currAppName() {
-      return this.$route.path.slice(1) + 'App'
+      var start = this.$route.path.slice(1)
+      start = start.charAt(0).toUpperCase() + start.slice(1)
+      return start + ' App'
     },
   },
   watch: {

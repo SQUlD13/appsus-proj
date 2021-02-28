@@ -3,16 +3,13 @@
 .search-box {
   border-radius: 8px;
   font-size: 1.2rem;
-  background-color: #a0cadf;
+  background-color: var(--black);
   position: relative;
   width: 500px;
 }
 
-.search-box * {
-  color: black !important;
-}
-
-.search-box input {
+.search-box input,input::placeholder {
+  color:var(--white) !important;
   padding: 0.8rem 0.8rem;
   font-size: 1.2rem;
   background-color: unset;
@@ -21,6 +18,13 @@
   background-color: unset;
   outline: unset;
   border: unset;
+}
+
+.search-input:active{
+  background: var(--m);
+}
+.search-input:focus{
+  background: var(--s);
 }
 
 .search-filters-box {
@@ -32,9 +36,9 @@
 }
 
 .search-filters-box > button {
-  border: 1px solid black;
+  border: 0;
   border-radius: 4px;
-  padding: 2px 4px;
+  padding: 3px 5px;
   font-size: 0.8rem;
   cursor: pointer;
   background-color: white;
@@ -48,4 +52,8 @@
 }
 .search-filters-a .filter-name {
   margin-inline-end: 0.6rem;
+}
+.search-btn-icon{
+  font-size: 16px;
+  margin-inline-end: 8px;
 }
