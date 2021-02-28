@@ -2,10 +2,10 @@
     margin-block-start: 15px;
     font-size: 26px;
 }
-.main-header .nav-link{
+.main-header .about-link{
     color:var(--black);
 }
 
-.main-header .nav-link:hover{
+.main-header .about:hover{
     color:var(--s);
 }
